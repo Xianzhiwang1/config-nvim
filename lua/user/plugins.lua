@@ -45,6 +45,22 @@ return packer.startup(function(use)
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+  use {
+    "w0rp/ale",
+    ft = { "sh", "bash", "zsh", "python", "cmake", "cpp", "c", "tex", "lua"},
+    cmd = "ALEEnable",
+    config = "vim.cmd[[ALEEnable]]"
+  }
+  
+  use(
+    { "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+    ft = { "markdown" }, }
+  )
+  use "lervag/vimtex"
+  use "SirVer/ultisnips"
+  use 'shaunsingh/solarized.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
