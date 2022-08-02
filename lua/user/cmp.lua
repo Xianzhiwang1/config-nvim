@@ -1,5 +1,5 @@
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
+-- Setup nvim-cmp.
+local cmp = require 'cmp'
 
 cmp.setup({
   snippet = {
