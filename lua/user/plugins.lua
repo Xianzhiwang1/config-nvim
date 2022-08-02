@@ -58,8 +58,6 @@ return packer.startup(function(use)
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }, }
   )
-  use "lervag/vimtex"
-  use "SirVer/ultisnips"
   use 'shaunsingh/solarized.nvim'
 
   -- Colorschemes
@@ -67,15 +65,21 @@ return packer.startup(function(use)
   use "lunarvim/darkplus.nvim"
 
   -- cmp plugins
+  use 'neovim/nvim-lspconfig'
   use "hrsh7th/nvim-cmp" -- The completion plugin
+  use "hrsh7th/cmp-nvim-lsp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "hrsh7th/cmp-nvim-lua" -- lua completions
+  -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
+  use "SirVer/ultisnips"
+  use "quangnguyen30192/cmp-nvim-ultisnips"
+  use "lervag/vimtex"
+  use 'KeitaNakamura/tex-conceal.vim'
 
   -- snippets
-  use "L3MON4D3/LuaSnip" --snippet engine
-  use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
