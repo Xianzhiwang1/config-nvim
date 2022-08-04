@@ -1,19 +1,18 @@
-local fn = vim.fn
-
--- Automatically install packer
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-  PACKER_BOOTSTRAP = fn.system {
-    "git",
-    "clone",
-    "--depth",
-    "1",
-    "https://github.com/wbthomason/packer.nvim",
-    install_path,
-  }
-  print "Installing packer close and reopen Neovim..."
-  vim.cmd [[packadd packer.nvim]]
-end
+-- uncommenting this tries to install packer every time I open neovim and I get a can't do multiple
+-- fastforwards when writing this file
+-- Automatically install packer local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   PACKER_BOOTSTRAP = fn.system {
+--     "git",
+--     "clone",
+--     "--depth",
+--     "1",
+--     "https://github.com/wbthomason/packer.nvim",
+--     install_path,
+--   }
+--   print "Installing packer close and reopen Neovim..."
+--   vim.cmd [[packadd packer.nvim]]
+-- end
 
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
@@ -51,21 +50,20 @@ return packer.startup(function(use)
     cmd = "ALEEnable",
     config = "vim.cmd[[ALEEnable]]"
   }
-  
+
   use(
     { "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
     setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
     ft = { "markdown" }, }
   )
-  use 'shaunsingh/solarized.nvim'
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
   use "lunarvim/darkplus.nvim"
 
   -- cmp plugins
-  use 'neovim/nvim-lspconfig'
+  use "neovim/nvim-lspconfig"
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-nvim-lsp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -73,13 +71,14 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "hrsh7th/cmp-nvim-lua" -- lua completions
   -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
-  use "SirVer/ultisnips"
-  use "quangnguyen30192/cmp-nvim-ultisnips"
+  use "L3MON4D3/LuaSnip"
+  use "saadparwaiz1/cmp_luasnip"
   use "lervag/vimtex"
   use 'KeitaNakamura/tex-conceal.vim'
+  use "williamboman/mason.nvim" -- lsp manager
+  use "williamboman/mason-lspconfig.nvim"
 
-  -- snippets
-  -- use "rafamadriz/friendly-snippets" -- a bunch of snippets to use
+  use "nvim-telescope/telescope.nvim"
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

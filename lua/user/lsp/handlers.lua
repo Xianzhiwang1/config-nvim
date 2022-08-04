@@ -1,3 +1,4 @@
+-- THIS IS NOT RUN
 local M = {}
 
 -- TODO: backfill this to template
