@@ -71,6 +71,9 @@ return packer.startup(function(use)
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "hrsh7th/cmp-nvim-lua" -- lua completions
   -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
+
+  use "nvim-treesitter/nvim-treesitter"
+
   use "L3MON4D3/LuaSnip"
   use "saadparwaiz1/cmp_luasnip"
   use "lervag/vimtex"
@@ -78,7 +81,10 @@ return packer.startup(function(use)
   use "williamboman/mason.nvim" -- lsp manager
   use "williamboman/mason-lspconfig.nvim"
 
-  use "nvim-telescope/telescope.nvim"
+  use {
+    "nvim-telescope/telescope.nvim",
+    run = ":TSUpdate"
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

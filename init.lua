@@ -5,4 +5,5 @@ require "user.cmp"
 require "user.lsp"
 require "user.snippets"
 require "user.telescope"
+require "user.treesitter"
 

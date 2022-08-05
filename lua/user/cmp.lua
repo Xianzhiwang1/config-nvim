@@ -24,6 +24,7 @@ cmp.setup({
       function(fallback)
         local active_entry = cmp.get_active_entry()
         if luasnip.expandable() and cmp.visible() and active_entry then
+          cmp.complete()
           luasnip.expand()
         elseif cmp.visible() and active_entry then
           cmp.complete()
@@ -41,6 +42,7 @@ cmp.setup({
         local active_entry = cmp.get_active_entry()
         local expandable = luasnip.expandable()
         if not active_entry and expandable then
+          luasnip.confirmg()
           luasnip.expand()
         elseif cmp.visible() then
           cmp.select_next_item()

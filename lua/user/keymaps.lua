@@ -40,8 +40,8 @@ keymap("i", "<Right>", "", opts)
 -- keymap("n", "<Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
-keymap("n", "<S-l>", ":tabnext<CR>", opts)
-keymap("n", "<S-h>", ":tabprevious<CR>", opts)
+keymap("n", "<S-l>", ":bnext<CR>", opts)
+keymap("n", "<S-h>", ":bprev<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
@@ -56,10 +56,21 @@ keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<A-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<A-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<A-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<A-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<A-h>", "<C-\\><C-N><C-w>h", term_opts)
+keymap("t", "<A-j>", "<C-\\><C-N><C-w>j", term_opts)
+keymap("t", "<A-k>", "<C-\\><C-N><C-w>k", term_opts)
+keymap("t", "<A-l>", "<C-\\><C-N><C-w>l", term_opts)
 
 -- Telescope --
 keymap("n", "<leader>f", ":Telescope live_grep<CR>", term_opts)
 keymap("n", "<leader>p", ":Telescope find_files<CR>", term_opts)
+keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
+
+-- git-related
 keymap("n", "<leader>gb", ":Telescope git_branches<CR>", term_opts)
 keymap("n", "<leader>gl", ":Telescope git_commits<CR>", term_opts)
 keymap("n", "<leader>gs", ":Telescope git_status<CR>", term_opts)
