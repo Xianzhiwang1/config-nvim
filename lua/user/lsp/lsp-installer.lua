@@ -1,5 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup()
+local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
@@ -9,7 +10,7 @@ require("mason-lspconfig").setup_handlers({
   end,
   -- Next, you can provide targeted overrides for specific servers.
   ["sumneko_lua"] = function ()
-    require("lspconfig").sumneko_lua.setup {
+    lspconfig.sumneko_lua.setup {
       settings = {
         Lua = {
           diagnostics = {

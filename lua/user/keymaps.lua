@@ -34,20 +34,21 @@ keymap("i", "<Left>", "", opts)
 keymap("i", "<Right>", "", opts)
 
 -- Resize with arrows
--- keymap("n", "<Up>", ":resize +2<CR>", opts)
--- keymap("n", "<Down>", ":resize -2<CR>", opts)
--- keymap("n", "<Left>", ":vertical resize -2<CR>", opts)
--- keymap("n", "<Right>", ":vertical resize +2<CR>", opts)
+keymap("n", "<Up>", ":resize +2<CR>", opts)
+keymap("n", "<Down>", ":resize -2<CR>", opts)
+keymap("n", "<A-Left>", ":vertical resize -2<CR>", opts)
+keymap("n", "<A-Right>", ":vertical resize +2<CR>", opts)
 
 -- Navigate buffers
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprev<CR>", opts)
+keymap("n", "<Leader>w", ":bdelete<CR>", opts)
+keymap("n", "<Leader>s", ":w<CR>", opts)
 
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
-
 keymap("v", "p", '"_dP', opts)
 
 -- Terminal --
