@@ -1,4 +1,8 @@
-local telescope = require("telescope")
+local success, telescope = pcall(require, "telescope")
+if not success then
+  print("WARNING: telescope not loaded.")
+  return
+end
 local actions = require("telescope.actions")
 
 telescope.setup {

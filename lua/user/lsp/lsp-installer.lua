@@ -1,5 +1,7 @@
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+  ensure_installed = { "clangd", "pyright", "bashls", "texlab" }
+})
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
@@ -25,5 +27,20 @@ require("mason-lspconfig").setup_handlers({
       }
     }
   end,
+  ["pyright"] = function()
+    lspconfig.pyright.setup({
+      settings = {
+        python = {
+          analysis = {
+            typeCheckingMode = "basic"
+          },
+          venvPath = ".venv",
+        },
+        pyright = {
+          disableLanguageServices = true
+        }
+      }
+    })
+  end
 })
 

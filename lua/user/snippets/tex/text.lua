@@ -37,7 +37,8 @@ local snippets = {
     t({ "", "\\end{definition}", "" }),
     i(0)
   }, default_opts),
-  s("enum", utils.create_env_snip("enum"), default_opts),
+  s("enum", utils.create_env_snip("enumumerate"), default_opts),
+  s("enums", utils.create_env_snip("enumumerate*"), default_opts),
   s("aligns", utils.create_env_snip("align*"), default_opts),
   s("it", { t("\\item") },  { condition = function()
     return vim.api.nvim_eval("vimtex#env#get_inner()")["name"] == "enum"

@@ -83,7 +83,7 @@ cmp.setup({
     ),
     ['<Return>'] = cmp.mapping(
       function(fallback)
-        if cmp.visible() then
+        if cmp.visible() and cmp.get_active_entry() then
           cmp.confirm()
         else
           fallback()
@@ -101,9 +101,13 @@ cmp.setup({
     format = function(entry, vim_item)
       vim.notify(tostring(vim_item.info))
       local clients = vim.lsp.get_active_clients()
-      if #clients and clients[1].messages.name == "texlab" and entry.source.name == "nvim_lsp" then
+      if clients[1]
+        and clients[1].messages
+        and clients[1].messages.name == "texlab"
+        and entry and entry.source.name == "nvim_lsp"
+      then
         local s = tostring(entry:get_documentation()[2])
-        local p = string.find(s, ",") 
+        local p = string.find(s, ",")
         if p then
           vim_item.menu = s:sub(1, p - 1)
         end

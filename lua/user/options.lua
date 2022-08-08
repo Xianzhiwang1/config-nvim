@@ -67,6 +67,7 @@ vim.opt.clipboard = "unnamedplus"
 -- file encodings
 vim.opt.fileencodings = "utf-8,cp936,gbk,utf-16le"
 -- folding
+vim.o.foldlevelstart=1
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
@@ -74,3 +75,25 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 vim.opt.conceallevel = 2
 vim.g.tex_conceal = 'abdmg'
 vim.api.nvim_set_hl(0, "Conceal", { ctermfg=nil, guitermbg=nil})
+
+-- vimtex options
+vim.g.vimtex_compiler_method   =   'latexmk'
+vim.g.tex_flavor = 'latex'
+vim.g.vimtex_view_method = 'skim'
+vim.g.vimtex_quickfix_mode = 0
+vim.g.vimtex_indent_on_ampersands = 0
+vim.g.vimtex_view_skim_sync  =  1
+vim.g.vimtex_view_skim_activate  =  1
+vim.g.vimtex_compiler_latexmk =  {
+	 build_dir = './build',
+	 callback = 1,
+	 continuous = 1,
+	 executable = 'latexmk',
+	 options = {
+    '-verbose',
+    '-file-line-error',
+    '-synctex=1',
+    '-interaction=nonstopmode',
+    '-output-directory=build',
+  },
+}

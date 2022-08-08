@@ -50,12 +50,12 @@ return packer.startup(function(use)
     config = "vim.cmd[[ALEEnable]]"
   }
 
-  use(
-    { "iamcco/markdown-preview.nvim",
-    run = "cd app && npm install",
-    setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-    ft = { "markdown" }, }
-  )
+  -- use(
+  --   { "iamcco/markdown-preview.nvim",
+  --   run = "cd app && npm install",
+  --   setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
+  --   ft = { "markdown" }, }
+  -- )
 
   -- Colorschemes
   -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
@@ -82,12 +82,14 @@ return packer.startup(function(use)
 
   use {
     "nvim-telescope/telescope.nvim",
-    run = ":TSUpdate"
+    -- run = ":TSUpdate"
   }
+
+  use 'lewis6991/gitsigns.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+  -- if PACKER_BOOTSTRAP then
+  --   require("packer").sync()
+  -- end
 end)

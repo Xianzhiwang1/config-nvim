@@ -1,4 +1,9 @@
-local ls = require("luasnip")
+local success, ls = pcall(require, "luasnip")
+if not success then
+  return
+  print("WARNING: luasnip not loaded.")
+end
+
 ls.config.setup({
   enable_autosnippets = true
 })

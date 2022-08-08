@@ -39,6 +39,7 @@ local autosnippets = {
   s({ trig = "sbst" }, { t("\\subseteq") }, default_opts),
   s({ trig = "<<" }, { t("\\langle") }, default_opts),
   s({ trig = ">>" }, { t("\\rangle") }, default_opts),
+  s({ trig = "set" }, { t("\\{" ), i(1), t(" \\}"), i(0) }, default_opts),
   postfix({ trig = "sq" }, utils.trailing({ t("^2") }), default_opts),
   postfix({ trig = "cq" }, utils.trailing({ t("^3") }), default_opts),
   postfix({ trig = "td" }, { t("^{"), i(1), t("}") }, default_opts),
