@@ -6,8 +6,7 @@ local term_opts = { silent = true }
 local keymap = vim.api.nvim_set_keymap
 
 --Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts)
-vim.g.mapleader = " "
+keymap("", "<Space>", "<Nop>", opts) vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Modes
@@ -53,18 +52,19 @@ keymap("v", "p", '"_dP', opts)
 
 -- Terminal --
 -- Better terminal navigation
-keymap("t", "<C-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<C-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<C-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<C-l>", "<C-\\><C-N><C-w>l", term_opts)
-keymap("t", "<A-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<A-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<A-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<A-l>", "<C-\\><C-N><C-w>l", term_opts)
-keymap("t", "<A-h>", "<C-\\><C-N><C-w>h", term_opts)
-keymap("t", "<A-j>", "<C-\\><C-N><C-w>j", term_opts)
-keymap("t", "<A-k>", "<C-\\><C-N><C-w>k", term_opts)
-keymap("t", "<A-l>", "<C-\\><C-N><C-w>l", term_opts)
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", term_opts)
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", term_opts)
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", term_opts)
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", term_opts)
+keymap("t", "<C-m>", "<C-\\><C-n>", term_opts)
+keymap("t", "<A-h>", "<C-\\><C-n><C-w>h", term_opts)
+keymap("t", "<A-j>", "<C-\\><C-n><C-w>j", term_opts)
+keymap("t", "<A-k>", "<C-\\><C-n><C-w>k", term_opts)
+keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", term_opts)
+keymap("t", "<A-h>", "<C-\\><C-n><C-w>h", term_opts)
+keymap("t", "<A-j>", "<C-\\><C-n><C-w>j", term_opts)
+keymap("t", "<A-k>", "<C-\\><C-n><C-w>k", term_opts)
+keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", term_opts)
 
 -- Telescope --
 keymap("n", "<leader>f", ":Telescope live_grep<CR>", term_opts)

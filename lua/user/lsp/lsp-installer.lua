@@ -41,6 +41,16 @@ require("mason-lspconfig").setup_handlers({
         }
       }
     })
+  end,
+  ["clangd"] = function()
+    lspconfig.clangd.setup({
+      settings = {
+        CompileFlags = {
+          std = "c11",
+          compiler = "gcc",
+        },
+      }
+    })
   end
 })
 
