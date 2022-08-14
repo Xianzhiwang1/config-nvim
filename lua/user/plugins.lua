@@ -41,6 +41,7 @@ packer.init {
 return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
+  use "neovim/nvim-lspconfig"
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use {
@@ -56,36 +57,42 @@ return packer.startup(function(use)
   --   setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
   --   ft = { "markdown" }, }
   -- )
-
-  -- Colorschemes
-  -- use "lunarvim/colorschemes" -- A bunch of colorschemes you can try out
-  use "lunarvim/darkplus.nvim"
+  -- LSP 
+  use "williamboman/mason.nvim" -- lsp manager
+  use "williamboman/mason-lspconfig.nvim"
 
   -- cmp plugins
-  use "neovim/nvim-lspconfig"
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-nvim-lsp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
   use "hrsh7th/cmp-path" -- path completions
   use "hrsh7th/cmp-cmdline" -- cmdline completions
   use "hrsh7th/cmp-nvim-lua" -- lua completions
-  -- use "saadparwaiz1/cmp_luasnip" -- snippet completions
 
   use "nvim-treesitter/nvim-treesitter"
 
+  -- Snippets
   use "L3MON4D3/LuaSnip"
   use "saadparwaiz1/cmp_luasnip"
+
+  -- TeX
   use "lervag/vimtex"
   use 'KeitaNakamura/tex-conceal.vim'
-  use "williamboman/mason.nvim" -- lsp manager
-  use "williamboman/mason-lspconfig.nvim"
 
+  -- Telescope
   use {
     "nvim-telescope/telescope.nvim",
-    -- run = ":TSUpdate"
+     run = ":TSUpdate"
   }
 
+  -- gitsigns
   use 'lewis6991/gitsigns.nvim'
+
+  -- debugging
+  use {
+    'sakhnik/nvim-gdb',
+    run = ':!./install.sh' 
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

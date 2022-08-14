@@ -41,4 +41,6 @@ luac.out
 
 plugin/packer_compiled.lua
 packer.nvim
+ssh
+**/*secret*
 .DS_Store
