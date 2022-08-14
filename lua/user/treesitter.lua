@@ -6,7 +6,7 @@ end
 
 treesitter.setup({
   ensure_installed = { "c", "python", "bash", "json", "jsonc", "yaml", "lua", "latex" },
-  sync_install = true,
+  sync_install = false,
   highlight = {
     enable = true,
     disable = {"tex", "latex"}

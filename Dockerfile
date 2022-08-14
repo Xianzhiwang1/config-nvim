@@ -21,15 +21,14 @@ RUN chmod u+x /bin/nvim
 
 RUN chsh -s $(which zsh)
 
-# ADD . /opt/systems-programming
+RUN mkdir -p /root/.config/nvim
 
-# RUN mkdir ~/.config
-# RUN mkdir ~/.config/nvim
+ADD . /root/.config/nvim
 
-# ADD ~/.config/ /
+RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim /root/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-# WORKDIR /opt/systems-programming
+RUN touch root/.zshrc && cat /root/.config/nvim/zshrc >> /root/.zshrc
 
-ENTRYPOINT /bin/nvim
+ENTRYPOINT /bin/zsh
 
 ENV LC_ALL=C
