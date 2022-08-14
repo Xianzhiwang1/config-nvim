@@ -1,58 +1,22 @@
-# Neovim from scratch
+# My Neovim Configuration
 
-## Try out this config
+Forked from https://github.com/LunarVim/Neovim-from-scratch.
 
-Make sure to remove or move your current `nvim` directory
+## Usage
 
-```
-git clone git@github.com:ChristianChiarulli/Neovim-from-scratch.git ~/.config/nvim
-```
+Clone this repository to `~/.config/nvim`. If you have Docker installed, you can run
 
-Run `nvim` and wait for the plugins to be installed 
-
-**NOTE** (You will notice treesitter pulling in a bunch of parsers the next time you open Neovim) 
-
-
-each video will be associated with a branch so checkout the one you are interested in
-
-## Get healthy
-
-Open `nvim` and enter the following:
-
-```
-:checkhealth
+```bash
+sh build.sh
 ```
 
-You'll probably notice you don't have support for copy/paste also that python and node haven't been setup
+to build the container and
 
-So let's fix that
+```bash
+sh dvim
+```
 
-First we'll fix copy/paste
+to try out this config. You can also add `dvim` to your `PATH`.
+Then, run runnin `dnvim` from a directory will mount that directory to `/home` in the container.
+The first time you open neovim in the container, you will have to run `:PackerInstall` and then restart to download treesitter stuff.
 
-- On mac `pbcopy` should be builtin
-
-- On Ubuntu
-
-  ```
-  sudo apt install xsel
-  ```
-
-- On Arch Linux
-
-  ```
-  sudo pacman -S xsel
-  ```
-
-Next we need to install python support (node is optional)
-
-- Neovim python support
-
-  ```
-  pip install pynvim
-  ```
-
-- Neovim node support
-
-  ```
-  npm i -g neovim
-  ```

@@ -29,6 +29,8 @@ RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim /root/.local/s
 
 RUN touch root/.zshrc && cat /root/.config/nvim/zshrc >> /root/.zshrc
 
+WORKDIR /home
+
 ENTRYPOINT /bin/zsh
 
 ENV LC_ALL=C
