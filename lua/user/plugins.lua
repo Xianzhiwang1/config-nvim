@@ -88,7 +88,7 @@ return packer.startup(function(use)
   use "lewis6991/gitsigns.nvim"
 
   -- debugging
-  use {"sakhnik/nvim-gdb", run = ":!./install.sh"}
+  -- use {"sakhnik/nvim-gdb", run = ":!./install.sh"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

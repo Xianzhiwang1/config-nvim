@@ -21,9 +21,26 @@ local lua_format = helpers.make_builtin({
       "--chop-down-parameter",
       "--chop-down-table",
       "--extra-sep-at-table-end",
+      "--chop-down-parameter",
     },
     to_stdin = true,
   },
   factory = helpers.formatter_factory,
 })
-null_ls.setup({sources = {lua_format}})
+null_ls.setup({
+  sources = {lua_format},
+  on_attach = function(client, bufnr)
+    -- format on save
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+          vim.lsp.buf.formatting_sync()
+        end,
+      })
+    end
+  end,
+})

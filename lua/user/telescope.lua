@@ -5,7 +5,7 @@ if not success then
 end
 local actions = require("telescope.actions")
 
-telescope.setup {
+telescope.setup({
   defaults = {
     vimgrep_arguments = {
       "rg",
@@ -30,4 +30,4 @@ telescope.setup {
       },
     },
   },
-}
+})

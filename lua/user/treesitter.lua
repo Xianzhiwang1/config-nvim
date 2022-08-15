@@ -13,7 +13,6 @@ treesitter.setup({
     "jsonc",
     "yaml",
     "lua",
-    "latex",
   },
   sync_install = false,
   highlight = {enable = true, disable = {"tex", "latex"}},
