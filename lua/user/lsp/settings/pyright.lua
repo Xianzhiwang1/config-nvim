@@ -1,8 +1,1 @@
-return {
-	settings = {
-    python = {
-      typeCheckingMode = "off",
-      venvPath = ".venv",
-    }
-	},
-}
+return {settings = {python = {typeCheckingMode = "off", venvPath = ".venv"}}}

@@ -1,4 +1,4 @@
-local success, gitsigns = pcall(require, 'gitsigns')
+local success, gitsigns = pcall(require, "gitsigns")
 if not success then
   print("WARNING: gitsigns not loaded.")
   return
@@ -10,8 +10,6 @@ gitsigns.setup({
   word_diff = false,
   attach_to_untracked = true,
   current_line_blame = true,
-  current_line_blame_opts = {
-    delay = 100
-  }
+  current_line_blame_opts = {delay = 100},
 })
 

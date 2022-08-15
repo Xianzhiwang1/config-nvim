@@ -1,12 +1,13 @@
-local opts = { noremap = true, silent = true }
+local opts = {noremap = true, silent = true}
 
-local term_opts = { silent = true }
+local term_opts = {silent = true}
 
 -- Shorten function name
 local keymap = vim.api.nvim_set_keymap
 
---Remap space as leader key
-keymap("", "<Space>", "<Nop>", opts) vim.g.mapleader = " "
+-- Remap space as leader key
+keymap("", "<Space>", "<Nop>", opts)
+vim.g.mapleader = " "
 
 -- Modes
 --   normal_mode = "n",
@@ -47,7 +48,7 @@ keymap("n", "<Leader>s", ":w<CR>", opts)
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)
 keymap("v", ">", ">gv", opts)
-keymap("v", "p", '"_dP', opts)
+keymap("v", "p", "\"_dP", opts)
 
 -- Terminal --
 -- Better terminal navigation
@@ -67,7 +68,8 @@ keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", term_opts)
 
 -- Telescope --
 keymap("n", "<leader>f", ":Telescope live_grep hidden=true<CR>", term_opts)
-keymap("n", "<leader>p", ":Telescope find_files hidden=true<CR>", term_opts)
+keymap("n", "<leader>p", ":Telescope find_files hidden=true no_ignore=true<CR>",
+       term_opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
 
 -- git-related
@@ -76,12 +78,14 @@ keymap("n", "<leader>gl", ":Telescope git_commits<CR>", term_opts)
 keymap("n", "<leader>gs", ":Telescope git_status<CR>", term_opts)
 
 -- lsp
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'gD', vim.lsp.buf.declaration)
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
-vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
+vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
 vim.g.maplocalleader = " "
 
-keymap("n", ",r", ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>", term_opts)
+keymap("n", ",r",
+       ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>",
+       term_opts)
