@@ -66,8 +66,8 @@ keymap("t", "<A-k>", "<C-\\><C-n><C-w>k", term_opts)
 keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", term_opts)
 
 -- Telescope --
-keymap("n", "<leader>f", ":Telescope live_grep<CR>", term_opts)
-keymap("n", "<leader>p", ":Telescope find_files<CR>", term_opts)
+keymap("n", "<leader>f", ":Telescope live_grep hidden=true<CR>", term_opts)
+keymap("n", "<leader>p", ":Telescope find_files hidden=true<CR>", term_opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
 
 -- git-related
