@@ -85,3 +85,6 @@ vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help)
 vim.g.maplocalleader = " "
 
 keymap("n", ",r", ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>", term_opts)
+
+keymap("i", "<C-s>", "<Esc>mm[sz=1<CR>`mi", term_opts)
+

@@ -97,3 +97,7 @@ vim.g.vimtex_compiler_latexmk =  {
     '-output-directory=build',
   },
 }
+
+-- spelling
+vim.opt.spell = true
+vim.opt.spelllang = "en_us"

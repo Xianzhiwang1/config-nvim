@@ -32,7 +32,7 @@ ADD . /root/.config/nvim
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim /root/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # Install pakcer packages
-# RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerInstall'
 
 # generate zshrc
 RUN touch /root/.zshrc && cat /root/.config/nvim/zshrc >> /root/.zshrc
@@ -53,7 +53,10 @@ RUN mkdir -p /root/.ssh && \
 RUN mv /root/.config/nvim/ssh/id_* /root/.ssh \
     && chmod 600 /root/.ssh/id_*
 
-ENTRYPOINT /bin/zsh
+# git configurations
+RUN git config --global user.email "stevenjin8@gmail.com"
 
+ENTRYPOINT /bin/zsh
+#TODO run the install script for the GDB thing
 # Gets read of GDB warnings
 ENV LC_ALL=C
