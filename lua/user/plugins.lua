@@ -12,7 +12,6 @@
 --   print "Installing packer close and reopen Neovim..."
 --   vim.cmd [[packadd packer.nvim]]
 -- end
-
 -- Autocommand that reloads neovim whenever you save the plugins.lua file
 vim.cmd [[
   augroup packer_user_config
@@ -46,9 +45,9 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use {
     "w0rp/ale",
-    ft = { "sh", "bash", "zsh", "python", "cmake", "cpp", "c", "tex", "lua"},
+    ft = { "sh", "bash", "zsh", "python", "cmake", "cpp", "c", "tex", "lua" },
     cmd = "ALEEnable",
-    config = "vim.cmd[[ALEEnable]]"
+    config = "vim.cmd[[ALEEnable]]",
   }
 
   -- use(
@@ -57,9 +56,12 @@ return packer.startup(function(use)
   --   setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
   --   ft = { "markdown" }, }
   -- )
-  -- LSP 
+  -- LSP
   use "williamboman/mason.nvim" -- lsp manager
   use "williamboman/mason-lspconfig.nvim"
+
+  -- formatting
+  use "jose-elias-alvarez/null-ls.nvim"
 
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
@@ -77,22 +79,16 @@ return packer.startup(function(use)
 
   -- TeX
   use "lervag/vimtex"
-  use 'KeitaNakamura/tex-conceal.vim'
+  use "KeitaNakamura/tex-conceal.vim"
 
   -- Telescope
-  use {
-    "nvim-telescope/telescope.nvim",
-     run = ":TSUpdate"
-  }
+  use { "nvim-telescope/telescope.nvim", run = ":TSUpdate" }
 
   -- gitsigns
-  use 'lewis6991/gitsigns.nvim'
+  use "lewis6991/gitsigns.nvim"
 
   -- debugging
-  use {
-    'sakhnik/nvim-gdb',
-    run = ':!./install.sh' 
-  }
+  -- use {"sakhnik/nvim-gdb", run = ":!./install.sh"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

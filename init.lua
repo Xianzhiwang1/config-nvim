@@ -7,4 +7,5 @@ require "user.snippets"
 require "user.telescope"
 require "user.treesitter"
 require "user.git"
-
+require "user.null"
+require "user.neovide"

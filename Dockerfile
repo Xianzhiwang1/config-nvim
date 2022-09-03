@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 RUN yes y | unminimize
 
 RUN apt-get -qq update && apt-get install -yq \
+    software-properties-common \
     build-essential \
     cmake \
     curl \
@@ -16,6 +17,18 @@ RUN apt-get -qq update && apt-get install -yq \
     valgrind \
     zsh
 
+RUN add-apt-repository ppa:deadsnakes/ppa
+
+RUN apt-get install -yq \
+  zip \
+  python3.9 \
+  python3.9-distutils \
+  python3-distutils \
+  python3-venv \
+  python3-wheel \
+  && curl https://bootstrap.pypa.io/get-pip.py | python3.9
+
+RUN python3.9 -m pip install neovim clang-format
 # This hasn't hit apt yet
 # Install neovim
 RUN curl -LO "https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.tar.gz" \
