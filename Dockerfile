@@ -1,4 +1,6 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN yes y | unminimize
 
@@ -37,12 +39,13 @@ RUN curl -LO "https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-lin
 # Add neovim to path
 ENV PATH="/nvim-linux64/bin/:${PATH}"
 
-# RUN mkdir -p /root/.config/nvim
-
 ADD . /root/.config/nvim
 
 # Install packer
 RUN git clone --depth 1 https://github.com/wbthomason/packer.nvim /root/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+RUN nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+RUN nvim --headless +TSUpdateSync +qa
 
 # generate zshrc
 RUN touch /root/.zshrc && cat /root/.config/nvim/zshrc >> /root/.zshrc
@@ -55,13 +58,13 @@ WORKDIR /home
 
 # Add ssh keys
 
-#  RUN mkdir -p /root/.ssh && \
-#      chmod 0700 /root/.ssh && \
-#      ssh-keyscan github.com > /root/.ssh/known_hosts
+RUN mkdir -p /root/.ssh && \
+  chmod 0700 /root/.ssh && \
+  ssh-keyscan github.com > /root/.ssh/known_hosts
 
 # Add the keys and set permissions
-#  RUN mv /root/.config/nvim/ssh/id_* /root/.ssh \
-#      && chmod 600 /root/.ssh/id_*
+RUN mv /root/.config/nvim/ssh/id_* /root/.ssh \
+  && chmod 600 /root/.ssh/id_*
 
 # git configurations
 RUN git config --global user.email "stevenjin8@gmail.com" \
@@ -72,8 +75,6 @@ ENTRYPOINT /bin/zsh
 RUN useradd -s /bin/zsh -m vscode \
  && groupadd docker \
  && usermod -aG docker vscode
-
-USER vscode
 
 # Gets read of GDB warnings
 ENV LC_ALL=C

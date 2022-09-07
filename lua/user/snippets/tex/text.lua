@@ -47,7 +47,8 @@ local snippets = {
   s("aligns", utils.create_env_snip("align*"), default_opts),
   s("it", {t("\\item")}, {
     condition = function()
-      return vim.api.nvim_eval("vimtex#env#get_inner()")["name"] == "enum"
+      local env = vim.api.nvim_eval("vimtex#env#get_inner()")["name"]
+      return env == "enumerate" or env == "enumerate*"
     end,
   }),
   s("eq", {t({"\\[", "\t"}), i(1), t({"", "\\]", ""}), i(0)}, default_opts),

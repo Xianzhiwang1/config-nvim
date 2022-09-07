@@ -82,7 +82,7 @@ return packer.startup(function(use)
   use "KeitaNakamura/tex-conceal.vim"
 
   -- Telescope
-  use { "nvim-telescope/telescope.nvim", run = ":TSUpdate" }
+  use { "nvim-telescope/telescope.nvim" }
 
   -- gitsigns
   use "lewis6991/gitsigns.nvim"
@@ -92,7 +92,7 @@ return packer.startup(function(use)
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  -- if PACKER_BOOTSTRAP then
-  --   require("packer").sync()
-  -- end
+  if PACKER_BOOTSTRAP then
+    require("packer").sync()
+  end
 end)

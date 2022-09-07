@@ -1,2 +1,10 @@
 #! /bin/bash
-docker run -it --privileged -v $(pwd):/home nvim:latest
+NAME="dnvim"
+if docker container inspect $NAME >/dev/null 2>&1; then
+  echo "Attaching to running container"
+  docker exec -it --privileged $NAME zsh
+else
+  echo "Creating container"
+  docker run --name $NAME -it --rm --privileged -v $(pwd):/home nvim:latest
+fi
+

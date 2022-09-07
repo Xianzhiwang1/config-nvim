@@ -58,12 +58,8 @@ for k, v in pairs(math_types) do
     trig = "([%a%d{}]*)" .. k,
     regTrig = true,
     hidden = true,
-  }, {
-    f(function(_, parent)
-      vim.notify(parent.captures[1])
-      return v .. "{" .. parent.captures[1] .. "}"
-    end),
-  }, default_opts)
+  }, {f(function(_, parent) return v .. "{" .. parent.captures[1] .. "}" end)},
+                       default_opts)
   table.insert(autosnippets, snip)
 end
 
