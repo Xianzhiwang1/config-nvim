@@ -3,7 +3,7 @@ vim.opt.backup = false
 -- more space in the neovim command line for displaying messages
 vim.opt.cmdheight = 2
 -- mostly just for cmp
-vim.opt.completeopt = {"menuone", "noselect"}
+vim.opt.completeopt = { "menuone", "noselect" }
 -- the encoding written to a file
 vim.opt.fileencoding = "utf-8"
 -- highlight all matches on previous search pattern
@@ -67,14 +67,14 @@ vim.opt.clipboard = "unnamedplus"
 -- file encodings
 vim.opt.fileencodings = "utf-8,cp936,gbk,utf-16le"
 -- folding
-vim.o.foldlevelstart = 1
+vim.o.foldlevelstart = 1000
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- texconceal
 vim.opt.conceallevel = 2
 vim.g.tex_conceal = "abdmg"
-vim.api.nvim_set_hl(0, "Conceal", {ctermfg = nil, guitermbg = nil})
+vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 
 -- vimtex options
 vim.g.vimtex_compiler_method = "latexmk"

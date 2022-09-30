@@ -22,7 +22,7 @@ local lua_format = helpers.make_builtin({
     description = "Reformats your Lua source code.",
   },
   method = FORMATTING,
-  filetypes = {"lua"},
+  filetypes = { "lua" },
   generator_opts = {
     command = "lua-format",
     args = {
@@ -33,6 +33,7 @@ local lua_format = helpers.make_builtin({
       "--chop-down-table",
       "--extra-sep-at-table-end",
       "--chop-down-parameter",
+      "--spaces-inside-table-braces",
     },
     to_stdin = true,
   },
@@ -45,14 +46,14 @@ local clang_format = helpers.make_builtin({
     url = "https://www.kernel.org/doc/html/latest/process/clang-format.html",
     description = "Tool to format C/C++/… code according to a set of rules and heuristics.",
   },
-  method = {FORMATTING, RANGE_FORMATTING},
-  filetypes = {"c", "cpp", "cs", "java", "cuda", "h"},
+  method = { FORMATTING, RANGE_FORMATTING },
+  filetypes = { "c", "cpp", "cs", "java", "cuda", "h" },
   generator_opts = {
     command = "clang-format",
     args = helpers.range_formatting_args_factory({
       "-assume-filename",
       "$FILENAME",
-    }, "--offset", "--length", {use_length = true}),
+    }, "--offset", "--length", { use_length = true }),
     to_stdin = true,
   },
   factory = helpers.formatter_factory,
@@ -60,7 +61,7 @@ local clang_format = helpers.make_builtin({
 
 function autosave(client, bufnr)
   if client.supports_method("textDocument/formatting") then
-    vim.api.nvim_clear_autocmds({group = augroup, buffer = bufnr})
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = bufnr,
@@ -69,4 +70,4 @@ function autosave(client, bufnr)
   end
 end
 
-null_ls.setup({sources = {lua_format, clang_format}, on_attach = autosave})
+null_ls.setup({ sources = { lua_format, clang_format }, on_attach = autosave })

@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-  ensure_installed = {"clangd", "pyright", "bashls", "texlab"},
+  ensure_installed = { "clangd", "pyright", "bashls", "texlab" },
 })
 local lspconfig = require("lspconfig")
 require("mason-lspconfig").setup_handlers({
@@ -15,7 +15,7 @@ require("mason-lspconfig").setup_handlers({
     lspconfig.sumneko_lua.setup {
       settings = {
         Lua = {
-          diagnostics = {globals = {"vim"}},
+          diagnostics = { globals = { "vim" } },
           completion = {
             -- Disable autocompletion with comments. I can spell well enough.
             showWord = "Disable",
@@ -29,7 +29,7 @@ require("mason-lspconfig").setup_handlers({
     lspconfig.pyright.setup({
       settings = {
         python = {
-          analysis = {typeCheckingMode = "basic"},
+          analysis = { typeCheckingMode = "basic" },
           pythonPath = ".venv/bin/python",
           venvPath = ".venv",
         },
@@ -38,8 +38,7 @@ require("mason-lspconfig").setup_handlers({
   end,
   ["clangd"] = function()
     lspconfig.clangd.setup({
-      settings = {CompileFlags = {std = "c11", compiler = "gcc"}},
+      settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
     })
   end,
 })
-

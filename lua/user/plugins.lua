@@ -31,7 +31,7 @@ end
 packer.init {
   display = {
     open_fn = function()
-      return require("packer.util").float { border = "rounded" }
+      return require("packer.util").float({ border = "rounded" })
     end,
   },
 }
@@ -39,60 +39,53 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
   -- My plugins here
-  use "wbthomason/packer.nvim" -- Have packer manage itself
-  use "neovim/nvim-lspconfig"
-  use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
-  use {
+  use("wbthomason/packer.nvim") -- Have packer manage itself
+  use("neovim/nvim-lspconfig")
+  use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
+  use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
+  use({
     "w0rp/ale",
     ft = { "sh", "bash", "zsh", "python", "cmake", "cpp", "c", "tex", "lua" },
     cmd = "ALEEnable",
     config = "vim.cmd[[ALEEnable]]",
-  }
+  })
 
-  -- use(
-  --   { "iamcco/markdown-preview.nvim",
-  --   run = "cd app && npm install",
-  --   setup = function() vim.g.mkdp_filetypes = { "markdown" } end,
-  --   ft = { "markdown" }, }
-  -- )
-  -- LSP
-  use "williamboman/mason.nvim" -- lsp manager
-  use "williamboman/mason-lspconfig.nvim"
+  use("iamcco/markdown-preview.nvim")
+
+  use("williamboman/mason.nvim") -- lsp manager
+  use("williamboman/mason-lspconfig.nvim")
 
   -- formatting
-  use "jose-elias-alvarez/null-ls.nvim"
+  use("jose-elias-alvarez/null-ls.nvim")
 
-  -- cmp plugins
-  use "hrsh7th/nvim-cmp" -- The completion plugin
-  use "hrsh7th/cmp-nvim-lsp" -- The completion plugin
-  use "hrsh7th/cmp-buffer" -- buffer completions
-  use "hrsh7th/cmp-path" -- path completions
-  use "hrsh7th/cmp-cmdline" -- cmdline completions
-  use "hrsh7th/cmp-nvim-lua" -- lua completions
+  -- -- cmp plugins
+  use("hrsh7th/nvim-cmp") -- The completion plugin
+  use("hrsh7th/cmp-nvim-lsp") -- The completion plugin
+  use("hrsh7th/cmp-buffer") -- buffer completions
+  use("hrsh7th/cmp-path") -- path completions
+  use("hrsh7th/cmp-cmdline") -- cmdline completions
+  use("hrsh7th/cmp-nvim-lua") -- lua completions
 
-  use "nvim-treesitter/nvim-treesitter"
+  use("nvim-treesitter/nvim-treesitter")
 
   -- Snippets
-  use "L3MON4D3/LuaSnip"
-  use "saadparwaiz1/cmp_luasnip"
+  use("L3MON4D3/LuaSnip")
+  use("saadparwaiz1/cmp_luasnip")
 
   -- TeX
-  use "lervag/vimtex"
-  use "KeitaNakamura/tex-conceal.vim"
+  use("lervag/vimtex")
+  use("KeitaNakamura/tex-conceal.vim")
 
   -- Telescope
-  use { "nvim-telescope/telescope.nvim" }
+  use("nvim-telescope/telescope.nvim")
 
   -- gitsigns
-  use "lewis6991/gitsigns.nvim"
+  use("lewis6991/gitsigns.nvim")
 
   -- debugging
   -- use {"sakhnik/nvim-gdb", run = ":!./install.sh"}
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
-  if PACKER_BOOTSTRAP then
-    require("packer").sync()
-  end
+  if PACKER_BOOTSTRAP then require("packer").sync() end
 end)

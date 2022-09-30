@@ -69,7 +69,7 @@ keymap("t", "<A-l>", "<C-\\><C-n><C-w>l", term_opts)
 -- Telescope --
 keymap("n", "<leader>f", ":Telescope live_grep hidden=true<CR>", term_opts)
 keymap("n", "<leader>p", ":Telescope find_files hidden=true no_ignore=true<CR>",
-  term_opts)
+       term_opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
 
 -- git-related
@@ -83,11 +83,12 @@ vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "K", vim.lsp.buf.hover)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "<C-f>", vim.lsp.buf.signature_help)
 vim.g.maplocalleader = " "
 
 keymap("n", ",r",
-  ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>",
-  term_opts)
+       ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>",
+       term_opts)
 
-keymap("i", "<C-s>", "<Esc>mm[sz=1<CR>`mi", term_opts)
+keymap("i", "<C-s>", "<Esc>mm[sz=1<CR>`mA", term_opts)
+keymap("n", "<C-s>", "mm[sz=1<CR>`m", term_opts)

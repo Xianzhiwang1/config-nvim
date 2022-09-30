@@ -21,45 +21,86 @@ local math_types = {
   mbf = "mathbf",
   bsy = "boldsymbol",
   cal = "mathcal",
-  tbf = "textbf",
   bar = "overline",
+  und = "underline",
 }
 
-local default_opts = {
+local auto_default_opts = {
   condition = utils.in_mathzone,
   show_condition = function() return false end,
 }
 
 local autosnippets = {
-  s({trig = "half"}, {t("\\frac12")}, default_opts),
-  s({trig = "infsum"}, {t("\\sum\\limits_{"), i(1), t("=1}^{\\infty}"), i(2)},
-    default_opts),
-  s({trig = "abs"}, {t("lVert"), i(1), t("\\rVert"), i(0)}, default_opts),
-  s({trig = "%.%.%."}, {t("\\ldots")}, default_opts),
-  s({trig = "xx"}, {t("\\times")}, default_opts),
-  s({trig = "sbst"}, {t("\\subseteq")}, default_opts),
-  s({trig = "<<"}, {t("\\langle")}, default_opts),
-  s({trig = ">>"}, {t("\\rangle")}, default_opts),
-  s({trig = "set"}, {t("\\{"), i(1), t(" \\}"), i(0)}, default_opts),
-  postfix({trig = "sq"}, utils.trailing({t("^2")}), default_opts),
-  postfix({trig = "cq"}, utils.trailing({t("^3")}), default_opts),
-  postfix({trig = "td"}, {t("^{"), i(1), t("}")}, default_opts),
-  postfix({trig = "__"}, utils.trailing({t("_{"), i(1), t("}")}), default_opts),
-  postfix({trig = "inv"}, utils.trailing({t("^{-1}")}), default_opts),
+  -- general snippets
+  s({ trig = "//" }, { t("\\frac{ "), i(1), t(" }{ "), i(2), t(" }"), i(0) },
+    auto_default_opts),
+  s({ trig = "half" }, { t("\\frac12") }, auto_default_opts),
+  s({ trig = "del" }, { t("\\partial") }, auto_default_opts),
+  s({ trig = "chs" }, { t("{ "), i(1), t(" \\choose "), i(2), t(" }") },
+    auto_default_opts),
+  s({ trig = "abs" }, { t("\\lvert"), i(1), t("\\rvert"), i(0) },
+    auto_default_opts),
+  s({ trig = "..." }, { t("\\ldots") }, auto_default_opts),
+  s({ trig = "ldt" }, { t("\\ldots") }, auto_default_opts),
+  s({ trig = "cdt" }, { t("\\cdot") }, auto_default_opts),
+  s({ trig = "**" }, { t("\\cdot") }, auto_default_opts),
+  s({ trig = "xx" }, { t("\\times") }, auto_default_opts),
+  s({ trig = "sbst" }, { t("\\subseteq") }, auto_default_opts),
+  s({ trig = "<<" }, { t("\\langle") }, auto_default_opts),
+  s({ trig = ">>" }, { t("\\rangle") }, auto_default_opts),
+  s({ trig = "emp" }, { t("\\varnothing") }, auto_default_opts),
+  postfix({ trig = "sq" }, utils.trailing({ t("^2") }), auto_default_opts),
+  postfix({ trig = "cq" }, utils.trailing({ t("^3") }), auto_default_opts),
+  postfix({ trig = "tp" }, utils.trailing({ t("^T") }), auto_default_opts),
+  postfix({ trig = "td" }, utils.trailing({ t("^{"), i(1), t("}"), i(0) }),
+          auto_default_opts),
+  postfix({ trig = "__" }, utils.trailing({ t("_{"), i(1), t("}"), i(0) }),
+          auto_default_opts),
+  postfix({ trig = "inv" }, utils.trailing({ t("^{-1}") }), auto_default_opts),
+  -- postfix({trig = "(%w[%w]*)0", match_pattern = "abc$"}, utils.trailing({t("_0")}), {
+  --   condition = utils.in_mathzone,
+  --   show_condition = function() return false end,
+  --   match_pattern = "abc",
+  -- }),
+  postfix({ trig = "([%a}]+)(%d)", regTrig = true }, {
+    f(
+        function(_, parent)
+          return parent.captures[1] .. "_" .. parent.captures[2]
+        end),
+  }, auto_default_opts),
 }
 
 for k, v in pairs(utils.GREEK_LETTERS) do
-  local snip = s({trig = "g" .. k}, {t("\\" .. v)}, default_opts)
+  local snip = s({ trig = " ;" .. k }, { t(" \\" .. v) }, auto_default_opts)
+  table.insert(autosnippets, snip)
+  snip = s({ trig = ";" .. k }, { t("\\" .. v) }, auto_default_opts)
+  table.insert(autosnippets, snip)
+  snip = s({ trig = "$;" .. k }, { t("$\\" .. v) }, auto_default_opts)
+  table.insert(autosnippets, snip)
+  snip = s({ trig = " ;" .. k:upper() },
+           { t(" \\" .. v:sub(1, 1):upper() .. v:sub(2, -1)) },
+           auto_default_opts)
+  table.insert(autosnippets, snip)
+  snip = s({ trig = ";" .. k:upper() },
+           { t("\\" .. v:sub(1, 1):upper() .. v:sub(2, -1)) }, auto_default_opts)
+  table.insert(autosnippets, snip)
+  snip = s({ trig = "$;" .. k:upper() },
+           { t("$\\" .. v:sub(1, 1):upper() .. v:sub(2, -1)) },
+           auto_default_opts)
   table.insert(autosnippets, snip)
 end
 
 for k, v in pairs(math_types) do
   local snip = postfix({
-    trig = "([%a%d{}]*)" .. k,
+    trig = "([%a%d{}\\]*)" .. k,
     regTrig = true,
     hidden = true,
-  }, {f(function(_, parent) return v .. "{" .. parent.captures[1] .. "}" end)},
-                       default_opts)
+  }, {
+    f(
+        function(_, parent)
+          return "\\" .. v .. "{" .. parent.captures[1] .. "}"
+        end),
+  }, auto_default_opts)
   table.insert(autosnippets, snip)
 end
 
@@ -71,7 +112,7 @@ for a = 2, 8, 1 do
   end
   table.insert(nodes, i(a))
   table.insert(nodes, t(" \\\\"))
-  table.insert(autosnippets, s("tr" .. tostring(a), nodes, default_opts) -- really slow
+  table.insert(autosnippets, s(tostring(a) .. "tr", nodes, auto_default_opts) -- really slow
   -- { condition = function()
   --   if not utils.in_mathzone() then
   --     return false
@@ -82,11 +123,35 @@ for a = 2, 8, 1 do
   )
 end
 
-local snippets = {
-  s({trig = "pmat"}, utils.create_env_snip("pmat"), default_opts),
-  s({trig = "bmat"}, utils.create_env_snip("bmat"), default_opts),
-  s({trig = "cases"}, utils.create_env_snip("cases"), default_opts),
+local default_opts = {
+  condition = utils.in_mathzone,
+  show_condition = utils.in_mathzone,
 }
 
-ls.add_snippets("tex", autosnippets, {type = "autosnippets"})
-ls.add_snippets("tex", snippets, {type = "snippets"})
+local snippets = {
+  s({ trig = "set" }, { t("\\{ "), i(1), t(" \\}"), i(0) }, auto_default_opts),
+  s({ trig = "nrm" }, { t("\\lVert "), i(1), t(" \\rVert"), i(0) },
+    auto_default_opts),
+  s({ trig = "lint" },
+    { t("\\int\\limits_{"), i(1), t("}^{"), i(2), t("}"), i(0) }, default_opts),
+  s({ trig = "cond" },
+    { t("p( "), i(1, "x"), t(" \\vert "), i(2), t(" )"), i(0) }, default_opts),
+  s({ trig = "infsum" },
+    { t("\\sum\\limits_{"), i(1), t("=1}^{\\infty}"), i(0) }, default_opts),
+  s({ trig = "frac" }, { t("\\frac{ "), i(1), t(" }{ "), i(2), t(" }"), i(0) },
+    default_opts),
+  s({ trig = "drv" }, { t("\\frac{ d"), i(1), t(" }{ d"), i(2), t(" }"), i(0) },
+    default_opts),
+  s({ trig = "drvx" }, { t("\\frac{ d"), i(1), t(" }{ dx }"), i(0) },
+    default_opts),
+  s({ trig = "drvxy" }, { t("\\frac{ dy }{ dx }") }, default_opts),
+  s({ trig = "pdrv" },
+    { t("\\frac{ \\partial"), i(1), t(" }{ \\partial"), i(2), t(" }"), i(0) },
+    default_opts),
+  s({ trig = "pmat" }, utils.create_env_snip("pmatrix"), default_opts),
+  s({ trig = "bmat" }, utils.create_env_snip("bmatrix"), default_opts),
+  s({ trig = "cases" }, utils.create_env_snip("cases"), default_opts),
+}
+
+ls.add_snippets("tex", autosnippets, { type = "autosnippets" })
+ls.add_snippets("tex", snippets, { type = "snippets" })

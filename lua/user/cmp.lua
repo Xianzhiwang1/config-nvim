@@ -20,12 +20,12 @@ cmp.setup({
     -- ['<Up>'] = cmp.mapping.scroll_docs(4),
     -- TODO: Better jumping? I dont really use jumping
     -- Expand snippets with spacebar if cmp menu is visible
-    ["<Leader>"] = cmp.mapping(function(fallback)
+    ["<Space>"] = cmp.mapping(function(fallback)
       local active_entry = cmp.get_active_entry()
-      if luasnip.expandable() and cmp.visible() and active_entry then
+      if luasnip.expandable() and cmp.visible() and cmp.get_active_entry() then
         cmp.complete()
         luasnip.expand()
-      elseif cmp.visible() and active_entry then
+      elseif cmp.visible() and cmp.get_active_entry() then
         cmp.complete()
         cmp.close()
         fallback()
@@ -61,7 +61,7 @@ cmp.setup({
     end, { "i", "s" }),
     -- Rather than exiting insert mode, abort expansion.
     ["<Esc>"] = cmp.mapping(function(fallback)
-      if cmp.visible() and cmp.get_active_entry() then
+      if cmp.visible() then
         cmp.abort()
       else
         fallback()
