@@ -31,11 +31,9 @@ local notin_mathzone = function() return not in_mathzone() end
 
 local create_env_snip = function(name)
   return {
-    t({"\\begin{" .. name .. "}", ""}),
-    t("\t"),
-    i(1),
-    t({"", "\\end{" .. name .. "}", ""}),
+    t({"\\begin{" .. name .. "}", "\t"}),
     i(0),
+    t({"", "\\end{" .. name .. "}", ""}),
   }
 end
 

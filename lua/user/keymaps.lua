@@ -80,10 +80,10 @@ keymap("n", "<leader>gs", ":Telescope git_status<CR>", term_opts)
 -- lsp
 vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "K", vim.lsp.buf.hover)
+vim.keymap.set("n", "gk", vim.lsp.buf.hover)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "<C-f>", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "gh", vim.lsp.buf.signature_help)
+vim.keymap.set("n", "gf", vim.lsp.buf.formatting)
 vim.g.maplocalleader = " "
 
 keymap("n", ",r",
@@ -92,3 +92,9 @@ keymap("n", ",r",
 
 keymap("i", "<C-s>", "<Esc>mm[sz=1<CR>`mA", term_opts)
 keymap("n", "<C-s>", "mm[sz=1<CR>`m", term_opts)
+vim.api.nvim_command([[
+  autocmd InsertEnter * set timeoutlen=150
+  autocmd InsertLeave * set timeoutlen=1000
+]])
+keymap("i", "jk", "<Esc>", term_opts)
+keymap("i", "kj", "<Esc>", term_opts)

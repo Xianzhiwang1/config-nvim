@@ -23,6 +23,9 @@ local math_types = {
   cal = "mathcal",
   bar = "overline",
   und = "underline",
+  hat = "hat",
+  txt = "text",
+  tld = "tilde",
 }
 
 local auto_default_opts = {
@@ -41,10 +44,9 @@ local autosnippets = {
   s({ trig = "abs" }, { t("\\lvert"), i(1), t("\\rvert"), i(0) },
     auto_default_opts),
   s({ trig = "..." }, { t("\\ldots") }, auto_default_opts),
-  s({ trig = "ldt" }, { t("\\ldots") }, auto_default_opts),
-  s({ trig = "cdt" }, { t("\\cdot") }, auto_default_opts),
   s({ trig = "**" }, { t("\\cdot") }, auto_default_opts),
   s({ trig = "xx" }, { t("\\times") }, auto_default_opts),
+  s({ trig = "RN" }, { t("\\mathbb{R}^N") }, auto_default_opts),
   s({ trig = "sbst" }, { t("\\subseteq") }, auto_default_opts),
   s({ trig = "<<" }, { t("\\langle") }, auto_default_opts),
   s({ trig = ">>" }, { t("\\rangle") }, auto_default_opts),
@@ -57,16 +59,16 @@ local autosnippets = {
   postfix({ trig = "__" }, utils.trailing({ t("_{"), i(1), t("}"), i(0) }),
           auto_default_opts),
   postfix({ trig = "inv" }, utils.trailing({ t("^{-1}") }), auto_default_opts),
-  -- postfix({trig = "(%w[%w]*)0", match_pattern = "abc$"}, utils.trailing({t("_0")}), {
-  --   condition = utils.in_mathzone,
-  --   show_condition = function() return false end,
-  --   match_pattern = "abc",
-  -- }),
   postfix({ trig = "([%a}]+)(%d)", regTrig = true }, {
     f(
         function(_, parent)
           return parent.captures[1] .. "_" .. parent.captures[2]
         end),
+  }, auto_default_opts),
+  postfix({ trig = "([%a%d^{}\\-]+)nrm", regTrig = true }, {
+    t("\\lVert "),
+    f(function(_, parent) return parent.captures[1] end),
+    t(" \\rVert"),
   }, auto_default_opts),
 }
 
@@ -112,20 +114,16 @@ for a = 2, 8, 1 do
   end
   table.insert(nodes, i(a))
   table.insert(nodes, t(" \\\\"))
-  table.insert(autosnippets, s(tostring(a) .. "tr", nodes, auto_default_opts) -- really slow
-  -- { condition = function()
-  --   if not utils.in_mathzone() then
-  --     return false
-  --   end
-  --   local env = vim.api.nvim_eval("vimtex#env#get_outer()")["name"]
-  --   return env and string.find(env, "mat")
-  -- end })
-  )
+  table.insert(autosnippets, s(tostring(a) .. "tr" , nodes, {
+    condition = utils.in_mathzone,
+    show_condition = function() return false end,
+    priority = 20000,
+  }))
 end
 
 local default_opts = {
   condition = utils.in_mathzone,
-  show_condition = utils.in_mathzone,
+  show_condition = function() return false end,
 }
 
 local snippets = {

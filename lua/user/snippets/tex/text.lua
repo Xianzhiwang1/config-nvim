@@ -34,27 +34,25 @@ local autosnippets = {
 }
 
 local snippets = {
-  s("eq", { t({ "\\[", "\t" }), i(1), t({ "", "\\]" }), i(0) }),
+  s("eq", { t({ "\\[", "\t" }), i(0), t({ "", "\\]" }) }),
   s("begin", {
     t("\\begin{"),
     i(1),
     t({ "}", "" }),
     t("\t"),
-    i(3),
+    i(0),
     t({ "", "" }),
     t("\\end{"),
     i(2),
     t({ "}", "" }),
-    i(0),
   }, default_opts),
   s("def", {
     t("\\begin{definition}["),
     i(1),
     t({ "]", "" }),
     t("\t"),
-    i(2),
-    t({ "", "\\end{definition}", "" }),
     i(0),
+    t({ "", "\\end{definition}", "" }),
   }, default_opts),
   s("eg", utils.create_env_snip("eg"), default_opts),
   s("prf", utils.create_env_snip("proof"), default_opts),
@@ -63,17 +61,13 @@ local snippets = {
   s("aligns", utils.create_env_snip("align*"), default_opts),
   s("align", utils.create_env_snip("align"), default_opts),
   s("thm", utils.create_env_snip("theorem"), default_opts),
-  s("it", { t("\\item") }, {
-    condition = function()
-      local env = vim.api.nvim_eval("vimtex#env#get_inner()")["name"]
-      return env == "enumerate" or env == "enumerate*"
-    end,
-  }),
+  s("corr", utils.create_env_snip("corollary"), default_opts),
+  s("it", { t("\\item") }, default_opts),
 }
 
 for k, v in pairs(text_types) do
   local snip = postfix({ trig = "([%a%d]*)" .. k, regTrig = true }, {
-    f(function(_, parent) return v .. "{" .. parent.captures[1] end),
+    f(function(_, parent) return "\\" .. v .. "{" .. parent.captures[1] end),
     i(1),
     t("}"),
     i(0),

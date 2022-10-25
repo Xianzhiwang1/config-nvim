@@ -21,7 +21,6 @@ cmp.setup({
     -- TODO: Better jumping? I dont really use jumping
     -- Expand snippets with spacebar if cmp menu is visible
     ["<Space>"] = cmp.mapping(function(fallback)
-      local active_entry = cmp.get_active_entry()
       if luasnip.expandable() and cmp.visible() and cmp.get_active_entry() then
         cmp.complete()
         luasnip.expand()
@@ -35,14 +34,7 @@ cmp.setup({
     end, { "i", "s" }),
     -- Supertab
     ["<Tab>"] = cmp.mapping(function(fallback)
-      local active_entry = cmp.get_active_entry()
-      local expandable = luasnip.expandable()
-      if not active_entry and expandable then
-        cmp.confirm()
-        luasnip.expand()
-      elseif cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
+      if luasnip.expandable() then
         luasnip.expand()
       elseif luasnip.jumpable() then
         luasnip.jump(1)
@@ -51,22 +43,22 @@ cmp.setup({
       end
     end, { "i", "s" }),
     ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable() then
+      if luasnip.jumpable() then
         luasnip.jump(-1)
       else
         fallback()
       end
     end, { "i", "s" }),
+    ["<Right>"] = cmp.mapping(function() luasnip.jump(1) end, { "i", "s" }),
+    ["<Left>"] = cmp.mapping(function() luasnip.jump(-1) end, { "i", "s" }),
     -- Rather than exiting insert mode, abort expansion.
-    ["<Esc>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.abort()
-      else
-        fallback()
-      end
-    end, { "i", "s" }),
+    -- ["<Esc>"] = cmp.mapping(function(fallback)
+    --   if cmp.visible() then
+    --     cmp.abort()
+    --   else
+    --     fallback()
+    --   end
+    -- end, { "i", "s" }),
     ["<Return>"] = cmp.mapping(function(fallback)
       if cmp.visible() and cmp.get_active_entry() then
         cmp.confirm()
@@ -74,6 +66,8 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+    ["<Up>"] = cmp.mapping(function() cmp.select_prev_item() end, { "i", "s" }),
+    ["<Down>"] = cmp.mapping(function() cmp.select_next_item() end, { "i", "s" }),
   },
   sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" } },
   formatting = {

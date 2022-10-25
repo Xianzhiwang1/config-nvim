@@ -65,7 +65,7 @@ vim.opt.whichwrap = ""
 -- use system clipboard
 vim.opt.clipboard = "unnamedplus"
 -- file encodings
-vim.opt.fileencodings = "utf-8,cp936,gbk,utf-16le"
+vim.opt.fileencodings = "utf-8"
 -- folding
 vim.o.foldlevelstart = 1000
 vim.o.foldmethod = "expr"

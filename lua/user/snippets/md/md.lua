@@ -20,7 +20,9 @@ local default_opts = { show_condition = function() return false end }
 
 local snippets = {
   s({ trig = "bol" }, { t("Bolshevik") }, default_opts),
-  s({ trig = "mens" }, { t("Menshivik") }, default_opts),
+  s({ trig = "mens" }, { t("Menshevik") }, default_opts),
+  s({ trig = "alx" }, { t("Alexievich") }, default_opts),
+  s({ trig = "def" }, { t("**"), i(1), t("**: "), i(0)}, default_opts),
 }
 
 ls.add_snippets("markdown", snippets, { type = "snippets" })
