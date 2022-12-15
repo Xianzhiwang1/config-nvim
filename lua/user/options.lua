@@ -25,7 +25,7 @@ vim.opt.splitbelow = true
 -- force all vertical splits to go to the right of current window
 vim.opt.splitright = true
 -- creates a swapfile
-vim.opt.swapfile = false
+vim.opt.swapfile = true
 -- set term gui colors (most terminals support this)
 vim.opt.termguicolors = true
 vim.g.colors_name = "solarized"
@@ -40,9 +40,9 @@ vim.opt.writebackup = false
 -- convert tabs to spaces
 vim.opt.expandtab = true
 -- the number of spaces inserted for each indentation
-vim.opt.shiftwidth = 2
+vim.opt.shiftwidth = 4
 -- insert 2 spaces for a tab
-vim.opt.tabstop = 2
+vim.opt.tabstop = 4
 -- highlight the current line
 vim.opt.cursorline = true
 -- set numbered lines
@@ -100,7 +100,7 @@ vim.g.vimtex_compiler_latexmk = {
 
 -- spelling
 vim.opt.spell = true
-vim.opt.spelllang = "en_us"
+vim.opt.spelllang = "en_us,en_ca"
 
 -- color
 vim.opt.background = "light"

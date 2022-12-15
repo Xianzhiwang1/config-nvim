@@ -22,6 +22,9 @@ local snippets = {
   s({ trig = "bol" }, { t("Bolshevik") }, default_opts),
   s({ trig = "mens" }, { t("Menshevik") }, default_opts),
   s({ trig = "alx" }, { t("Alexievich") }, default_opts),
+  s({ trig = "nik" }, { t("Khrushchev") }, default_opts),
+  s({ trig = "leo" }, { t("Brezhnev") }, default_opts),
+  s({ trig = "mik" }, { t("Gorbachev") }, default_opts),
   s({ trig = "def" }, { t("**"), i(1), t("**: "), i(0)}, default_opts),
 }
 

@@ -114,7 +114,7 @@ for a = 2, 8, 1 do
   end
   table.insert(nodes, i(a))
   table.insert(nodes, t(" \\\\"))
-  table.insert(autosnippets, s(tostring(a) .. "tr" , nodes, {
+  table.insert(autosnippets, s(tostring(a) .. "tr", nodes, {
     condition = utils.in_mathzone,
     show_condition = function() return false end,
     priority = 20000,
@@ -143,12 +143,23 @@ local snippets = {
   s({ trig = "drvx" }, { t("\\frac{ d"), i(1), t(" }{ dx }"), i(0) },
     default_opts),
   s({ trig = "drvxy" }, { t("\\frac{ dy }{ dx }") }, default_opts),
+  s({ trig = "lims" },
+    { t("\\limits_{"), i(1, "-\\infty"), t("}^{"), i(2, "\\infty"), t("}") },
+    default_opts),
   s({ trig = "pdrv" },
     { t("\\frac{ \\partial"), i(1), t(" }{ \\partial"), i(2), t(" }"), i(0) },
     default_opts),
   s({ trig = "pmat" }, utils.create_env_snip("pmatrix"), default_opts),
   s({ trig = "bmat" }, utils.create_env_snip("bmatrix"), default_opts),
   s({ trig = "cases" }, utils.create_env_snip("cases"), default_opts),
+  s("trig", {
+    i(1, "text_of_first"),
+    i(2, { "first_line_of_second", "second_line_of_second" }),
+    f(function(args, snip)
+      -- just concat first lines of both.
+      return args[1][1] .. args[2][1]
+    end, { ai[2], ai[1] }),
+  }),
 }
 
 ls.add_snippets("tex", autosnippets, { type = "autosnippets" })

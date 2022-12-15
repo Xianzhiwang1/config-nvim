@@ -25,7 +25,8 @@ local auto_default_opts = {
 local text_types = { tbf = "textbf", tit = "textit", und = "underline" }
 
 local autosnippets = {
-  s("mk", { t("$"), i(1), t("$"), i(0) }, auto_default_opts),
+  s("mk", { t("$"), i(1), t("$")}, auto_default_opts),
+  s("lbl", {t("\\label{"), i(1), t(":"), i(2), t("}")}, auto_default_opts),
   postfix({ trig = "([%w]+);;", regTrig = true }, {
     t("$"),
     f(function(_, parent) return parent.captures[1] end),
@@ -38,13 +39,16 @@ local snippets = {
   s("begin", {
     t("\\begin{"),
     i(1),
-    t({ "}", "" }),
-    t("\t"),
-    i(0),
+    t({ "}", }),
+    i(2),
+    t({"", "\t"}),
+        i(3),
     t({ "", "" }),
     t("\\end{"),
-    i(2),
-    t({ "}", "" }),
+    f(function(args, snip)
+      return args[1][1]
+    end, { 1 }),
+    t("}"),
   }, default_opts),
   s("def", {
     t("\\begin{definition}["),
@@ -61,6 +65,9 @@ local snippets = {
   s("aligns", utils.create_env_snip("align*"), default_opts),
   s("align", utils.create_env_snip("align"), default_opts),
   s("thm", utils.create_env_snip("theorem"), default_opts),
+  s("lem", utils.create_env_snip("lemma"), default_opts),
+  s("proper", utils.create_env_snip("property"), default_opts),
+  s("prop", utils.create_env_snip("proposition"), default_opts),
   s("corr", utils.create_env_snip("corollary"), default_opts),
   s("it", { t("\\item") }, default_opts),
 }
