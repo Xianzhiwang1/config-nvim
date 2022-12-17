@@ -5,5 +5,5 @@ if not success then
 end
 
 -- Not sure what handlers do.
--- require("user.lsp.handlers").setup()
+require("user.lsp.handlers").setup()
 require("user.lsp.lsp-installer")

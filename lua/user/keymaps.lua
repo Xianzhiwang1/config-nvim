@@ -77,15 +77,6 @@ keymap("n", "<leader>gb", ":Telescope git_branches<CR>", term_opts)
 keymap("n", "<leader>gl", ":Telescope git_commits<CR>", term_opts)
 keymap("n", "<leader>gs", ":Telescope git_status<CR>", term_opts)
 
--- lsp
-vim.keymap.set("n", "gd", vim.lsp.buf.definition)
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration)
-vim.keymap.set("n", "gk", vim.lsp.buf.hover)
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-vim.keymap.set("n", "gh", vim.lsp.buf.signature_help)
-vim.keymap.set("n", "gf", vim.lsp.buf.formatting)
-vim.g.maplocalleader = " "
-
 keymap("n", ",r",
        ":w<CR>:silent !/Applications/Skim.app/Contents/SharedSupport/displayline <C-r>=line('.')<CR> build/%:r.pdf <CR><R>",
        term_opts)

@@ -59,7 +59,7 @@ vim.opt.wrap = false
 vim.opt.scrolloff = 8
 vim.opt.sidescrolloff = 8
 -- the font used in graphical neovim applications
-vim.opt.guifont = "menlo:h23"
+vim.opt.guifont = "menlo:h21"
 
 vim.opt.whichwrap = ""
 -- use system clipboard
