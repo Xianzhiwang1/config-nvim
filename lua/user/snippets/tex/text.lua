@@ -70,6 +70,18 @@ local snippets = {
   s("prop", utils.create_env_snip("proposition"), default_opts),
   s("corr", utils.create_env_snip("corollary"), default_opts),
   s("it", { t("\\item") }, default_opts),
+  s("figref", { t("Figure~\\ref{fig:"), i(1), t("}")}, default_opts),
+  s("sfigref", { t("Figure~\\ref{sfig:"), i(1), t("}")}, default_opts),
+  s("secref", { t("Section~\\ref{sec:"), i(1), t("}")}, default_opts),
+  s("ssecref", { t("Section~\\ref{ssec:"), i(1), t("}")}, default_opts),
+  s("sssecref", { t("Section~\\ref{sssec:"), i(1), t("}")}, default_opts),
+  s("eqref", { t("Equation~\\ref{eq:"), i(1), t("}")}, default_opts),
+  s("thmref", { t("Theorem~\\ref{thm:"), i(1), t("}")}, default_opts),
+  s("lemref", { t("Lemma~\\ref{lem:"), i(1), t("}")}, default_opts),
+  s("propref", { t("Proposition~\\ref{prop:"), i(1), t("}")}, default_opts),
+  s("corrref", { t("Corollary~\\ref{corr:"), i(1), t("}")}, default_opts),
+  s("corrref", { t("Corollary~\\ref{corr:"), i(1), t("}")}, default_opts),
+  s("egref", { t("Example~\\ref{eg:"), i(1), t("}")}, default_opts),
 }
 
 for k, v in pairs(text_types) do
