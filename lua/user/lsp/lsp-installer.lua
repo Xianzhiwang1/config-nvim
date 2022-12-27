@@ -3,6 +3,7 @@ require("mason-lspconfig").setup({
     ensure_installed = { "clangd", "pyright", "bashls", "texlab" },
 })
 local lspconfig = require("lspconfig")
+local util = require('vim.lsp.util')
 
 local opts = { noremap = true, silent = true }
 vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
@@ -10,21 +11,32 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
 
+-- function help()
+--     local params = util.make_position_params()
+--     vim.lsp.buf_request(
+--         0,
+--         "textDocument/signatureHelp",
+--         params,
+--         function(_, result)
+--             if result and result.signatures and result.signatures[1] then
+--                 print(result.signatures[1].label)
+--             end
+--         end
+--     )
+-- end
+
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-    require "lsp_signature".on_attach({
-        hint_enable = false;
-        hint_prefix = ""
-    }, bufnr)
     -- Mappings.
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     local bufopts = { noremap = true, silent = true, buffer = bufnr }
     vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
     vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+    vim.keymap.set('n', '<space>k', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+    vim.keymap.set({ 'i', 'n' }, '<space>fs', vim.lsp.buf.signature_help, bufopts)
     vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
     vim.keymap.set('n', '<space>wl', function()
@@ -34,7 +46,7 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+    vim.keymap.set('n', '<space>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 
 require("mason-lspconfig").setup_handlers({
@@ -42,15 +54,28 @@ require("mason-lspconfig").setup_handlers({
     -- and will be called for each installed server that doesn't have
     -- a dedicated handler.
     function(server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup {}
+        require("lspconfig")[server_name].setup({})
     end,
     -- Next, you can provide targeted overrides for specific servers.
+    -- ["texlab"] = function()
+    --     lspconfig.texlab.setup {
+    --         on_attach = on_attach,
+    --         settings = {
+    --         },
+    --     }
+    -- end,
     ["sumneko_lua"] = function()
         lspconfig.sumneko_lua.setup {
             on_attach = on_attach,
             settings = {
                 Lua = {
                     diagnostics = { globals = { "vim" } },
+                    workspace = {
+                        library = {
+                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                        }
+                    },
                     completion = {
                         -- Disable autocompletion with comments. I can spell well enough.
                         showWord = "Disable",

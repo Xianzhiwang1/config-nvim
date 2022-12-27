@@ -6,7 +6,10 @@ local M = {}
 
 M.setup = function()
     lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
-        border = "double",
+        border = "rounded",
+    })
+    lsp.handlers["textDocument/signatureHelp"] = lsp.with(vim.lsp.handlers.signature_help, {
+        border = "rounded",
     })
 end
 

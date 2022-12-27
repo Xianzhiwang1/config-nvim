@@ -40,7 +40,6 @@ packer.init {
 return packer.startup(function(use)
     -- My plugins here
     use("wbthomason/packer.nvim") -- Have packer manage itself
-    use 'overcache/NeoSolarized'
     use("neovim/nvim-lspconfig")
     use("nvim-lua/popup.nvim") -- An implementation of the Popup API from vim in Neovim
     use("nvim-lua/plenary.nvim") -- Useful lua functions used ny lots of plugins
@@ -61,6 +60,7 @@ return packer.startup(function(use)
     use("hrsh7th/cmp-path") -- path completions
     use("hrsh7th/cmp-cmdline") -- cmdline completions
     use("hrsh7th/cmp-nvim-lua") -- lua completions
+    use("hrsh7th/cmp-nvim-lsp-signature-help") -- lua completions
 
     use("nvim-treesitter/nvim-treesitter")
 
@@ -74,15 +74,17 @@ return packer.startup(function(use)
 
     -- Rust
     use 'simrat39/rust-tools.nvim'
+    use("farmergreg/vim-lastplace")
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
-    use "ray-x/lsp_signature.nvim"
+    use('nvim-lualine/lualine.nvim')
+    use('jose-elias-alvarez/null-ls.nvim')
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if PACKER_BOOTSTRAP then require("packer").sync() end
-
 end)

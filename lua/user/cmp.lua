@@ -38,9 +38,8 @@ cmp.setup({
                 luasnip.expand()
             elseif luasnip.jumpable() then
                 luasnip.jump(1)
-            elseif cmp.visible() and cmp.get_selected_entry() then
-                cmp.select_next_item({count = 0})
-                cmp.complete()
+            elseif cmp.visible() then
+                cmp.select_next_item()
             else
                 fallback()
             end
@@ -48,6 +47,8 @@ cmp.setup({
         ["<S-Tab>"] = cmp.mapping(function(fallback)
             if luasnip.jumpable() then
                 luasnip.jump(-1)
+            elseif cmp.visible() then
+                cmp.select_prev_item()
             else
                 fallback()
             end
@@ -64,10 +65,9 @@ cmp.setup({
         ["<Up>"] = cmp.mapping(function() cmp.select_prev_item() end, { "i", "s" }),
         ["<Down>"] = cmp.mapping(function() cmp.select_next_item() end, { "i", "s" }),
     },
-    sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" } },
+    sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" }  },
     formatting = {
         format = function(entry, vim_item)
-            vim.notify(tostring(vim_item.info))
             local clients = vim.lsp.get_active_clients()
             if clients[1] and clients[1].messages and clients[1].messages.name ==
                 "texlab" and entry and entry.source.name == "nvim_lsp" then
@@ -97,3 +97,12 @@ cmp.setup({
     },
     matching = { disallow_fuzzy_matching = false },
 })
+
+-- cmp.setup.cmdline(':', {
+--   sources = {
+--     { name = 'cmdline' },
+--   },
+--   formatting = {
+--     fields = { "abbr" },
+--   }
+-- })

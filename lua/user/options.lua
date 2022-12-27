@@ -52,7 +52,7 @@ vim.opt.relativenumber = false
 -- set number column width to 4
 vim.opt.numberwidth = 4
 -- always show the sign column, otherwise it would shift the text each time
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "no"
 -- display lines as one long line
 vim.opt.wrap = false
 -- is one of my fav

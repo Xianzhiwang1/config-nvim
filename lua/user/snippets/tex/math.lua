@@ -45,6 +45,7 @@ local autosnippets = {
     auto_default_opts),
   s({ trig = "..." }, { t("\\ldots") }, auto_default_opts),
   s({ trig = "**" }, { t("\\cdot") }, auto_default_opts),
+  s({ trig = "oo" }, { t("\\circ") }, auto_default_opts),
   s({ trig = "xx" }, { t("\\times") }, auto_default_opts),
   s({ trig = "RN" }, { t("\\mathbb{R}^N") }, auto_default_opts),
   s({ trig = "sbst" }, { t("\\subseteq") }, auto_default_opts),
