@@ -87,5 +87,4 @@ local latexindent = helpers.make_builtin({
     generator_opts = { command = "latexindent", args = { "-l" }, to_stdin = true },
     factory = helpers.formatter_factory,
 })
-
-null_ls.setup({ sources = { } })
+null_ls.setup({ sources = { latexindent, null_ls.builtins.formatting.isort, null_ls.builtins.formatting.black } })

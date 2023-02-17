@@ -870,7 +870,7 @@ exe "hi! ALEWarningSign"        . s:fg_yellow   .s:bg_none   .s:fmt_none
 
 " NeoVim terminal buffer colours "{{{
 " ---------------------------------------------------------------------
-let g:terminal_color_0 = s:gui_base03
+let g:terminal_color_0 = s:gui_base0
 let g:terminal_color_1 = s:gui_red
 let g:terminal_color_2 = s:gui_green
 let g:terminal_color_3 = s:gui_yellow

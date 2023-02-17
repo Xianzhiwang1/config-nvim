@@ -5,13 +5,15 @@ if not success then
 end
 require('telescope').setup {
     defaults = {
-        -- Default configuration for telescope goes here:
-        -- config_key = value,
-        -- ..
-        --
-        file_ignore_patterns = {".git/.*$", }
+        file_ignore_patterns = { ".git/.*$", }
     },
+    extensions = {
+        file_browser = {
+            dir_icon = ""
+        },
+    }
 }
+require("telescope").load_extension("file_browser")
 
 local keymap = vim.api.nvim_set_keymap
 local term_opts = { silent = true }
@@ -29,4 +31,3 @@ keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
 keymap("n", "<leader>gb", ":Telescope git_branches<CR>", term_opts)
 keymap("n", "<leader>gc", ":Telescope git_commits<CR>", term_opts)
 keymap("n", "<leader>gs", ":Telescope git_status<CR>", term_opts)
-

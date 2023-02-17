@@ -57,7 +57,7 @@ keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", term_opts)
 keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", term_opts)
 keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", term_opts)
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", term_opts)
-keymap("t", "<C-m>", "<C-\\><C-n>", term_opts)
+-- keymap("t", "<C-m>", "<C-\\><C-n>", term_opts) -- return doesnt work w this
 keymap("t", "<A-h>", "<C-\\><C-n><C-w>h", term_opts)
 keymap("t", "<A-j>", "<C-\\><C-n><C-w>j", term_opts)
 keymap("t", "<A-k>", "<C-\\><C-n><C-w>k", term_opts)

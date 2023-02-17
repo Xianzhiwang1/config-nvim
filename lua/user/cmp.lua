@@ -5,7 +5,6 @@ local luasnip = require("luasnip")
 
 cmp.setup({
     snippet = {
-        -- REQUIRED - you must specify a snippet engine
         expand = function(args)
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
         end,
@@ -98,11 +97,3 @@ cmp.setup({
     matching = { disallow_fuzzy_matching = false },
 })
 
--- cmp.setup.cmdline(':', {
---   sources = {
---     { name = 'cmdline' },
---   },
---   formatting = {
---     fields = { "abbr" },
---   }
--- })
