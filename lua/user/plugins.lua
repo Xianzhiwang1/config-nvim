@@ -42,7 +42,7 @@ return packer.startup(function(use)
 
     -- TeX
     use("lervag/vimtex")
-    use("KeitaNakamura/tex-conceal.vim")
+    -- use("KeitaNakamura/tex-conceal.vim")
 
     -- Rust
     -- use 'simrat39/rust-tools.nvim'

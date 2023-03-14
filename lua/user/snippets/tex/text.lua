@@ -26,7 +26,7 @@ local text_types = { tbf = "textbf", tit = "textit", und = "underline" }
 
 local autosnippets = {
     s("mk", { t("$"), i(1), t("$") }, auto_default_opts),
-    s("bk", { t("$"), i(1), t("$") }, auto_default_opts),
+    s("bk", { t("{$"), i(1), t("$}") }, auto_default_opts),
     s("lbl", { t("\\label{"), i(1), t(":"), i(2), t("}") }, auto_default_opts),
     postfix({ trig = "([%w]+);;", regTrig = true }, {
         t("$"),
@@ -36,7 +36,7 @@ local autosnippets = {
 }
 
 local snippets = {
-    s("eq", { t({ "\\[", "\t" }), i(0), t({ "", "\\]" }) }),
+    s("ipa", { t("\\textipa{["), i(1), t("]}") }, default_opts),
     s("begin", {
         t("\\begin{"),
         i(1),
@@ -60,6 +60,7 @@ local snippets = {
         t({ "", "\\end{definition}", "" }),
     }, default_opts),
     s("eg", utils.create_env_snip("eg"), default_opts),
+    s("eq", utils.create_env_snip("equation*"), default_opts),
     s("prf", utils.create_env_snip("proof"), default_opts),
     s("enum", utils.create_env_snip("enumerate"), default_opts),
     s("enums", utils.create_env_snip("enumerate*"), default_opts),

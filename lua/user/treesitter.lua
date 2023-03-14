@@ -1,15 +1,15 @@
 local success, treesitter = pcall(require, "nvim-treesitter.configs")
 if not success then
-  print("WARNING: treesitter not loaded.")
-  return
+    print("WARNING: treesitter not loaded.")
+    return
 end
 
 treesitter.setup({
-  ensure_installed = { "c", "python", "bash", "json", "jsonc", "yaml", "lua" },
-  sync_install = false,
-  highlight = { enable = true, disable = { "tex", "latex" } },
-  indent = { enable = true },
-  folding = { enable = true },
+    ensure_installed = { "c", "python", "bash", "json", "jsonc", "yaml", "lua" },
+    sync_install = false,
+    highlight = { enable = true, disable = { "tex", "latex" } },
+    indent = { enable = true, disable = { "python" } },
+    folding = { enable = true },
 })
 
 -- Shorten function name
@@ -19,7 +19,7 @@ local term_opts = { silent = true }
 -- Telescope --
 keymap("n", "<leader>f", ":Telescope live_grep hidden=true<CR>", term_opts)
 keymap("n", "<leader>p", ":Telescope find_files hidden=true no_ignore=true<CR>",
-       term_opts)
+    term_opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", term_opts)
 
 -- git-related
