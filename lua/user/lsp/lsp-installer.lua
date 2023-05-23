@@ -1,7 +1,7 @@
 require("mason").setup()
 local mason_lsp = require("mason-lspconfig")
 mason_lsp.setup({
-    ensure_installed = { "clangd", "pyright", "bashls", "texlab", "lua_ls" },
+    ensure_installed = { "texlab", "lua_ls" },
 })
 local lspconfig = require("lspconfig")
 

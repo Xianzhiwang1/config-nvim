@@ -28,7 +28,8 @@ vim.opt.splitright = true
 vim.opt.swapfile = true
 -- set term gui colors (most terminals support this)
 vim.opt.termguicolors = true
-vim.g.colors_name = "solarized"
+-- vim.g.colors_name = "solarized"
+vim.g.colors_name = "gruvbox"
 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.timeoutlen = 1000
 -- enable persistent undo
@@ -79,7 +80,8 @@ vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 -- vimtex options
 vim.g.vimtex_compiler_method = "latexmk"
 vim.g.tex_flavor = "latex"
-vim.g.vimtex_view_method = "skim"
+vim.g.vimtex_view_method = "zathura"
+-- vim.g.vimtex_view_method = "mupdf"
 vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_indent_on_ampersands = 0
 vim.g.vimtex_view_skim_sync = 1
@@ -103,4 +105,13 @@ vim.opt.spell = true
 vim.opt.spelllang = "en_us,en_ca"
 
 -- color
-vim.opt.background = "light"
+-- here is the place to change the color of nvim
+vim.opt.background = "dark"
+-- vim.opt.background = "light"
+
+-- note to self
+-- set background=dark or light if you want light mode
+-- colorscheme gruvbox
+
+
+
