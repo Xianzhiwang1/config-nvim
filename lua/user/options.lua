@@ -80,7 +80,8 @@ vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 -- vimtex options
 vim.g.vimtex_compiler_method = "latexmk"
 vim.g.tex_flavor = "latex"
-vim.g.vimtex_view_method = "zathura"
+-- vim.g.vimtex_view_method = "preview"
+-- vim.g.vimtex_view_method = "zathura"
 -- vim.g.vimtex_view_method = "mupdf"
 vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_indent_on_ampersands = 0
