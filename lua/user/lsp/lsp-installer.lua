@@ -1,8 +1,5 @@
 require("mason").setup()
 local mason_lsp = require("mason-lspconfig")
-mason_lsp.setup({
-    ensure_installed = { "clangd", "pyright", "bashls", "texlab", "lua_ls" },
-})
 local lspconfig = require("lspconfig")
 
 local opts = { noremap = true, silent = true }
@@ -35,76 +32,59 @@ local on_attach = function(client, bufnr)
     vim.keymap.set('n', '<space>dq', vim.diagnostic.setloclist, opts)
 end
 
-mason_lsp.setup_handlers({
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-        require("lspconfig")[server_name].setup({ on_attach = on_attach })
-    end,
-    -- Next, you can provide targeted overrides for specific servers.
-    ["texlab"] = function()
-        lspconfig.texlab.setup {
-            on_attach = on_attach,
-            settings = {
+lspconfig.texlab.setup {
+    on_attach = on_attach,
+    settings = {
+    },
+}
+
+lspconfig.arduino_language_server.setup {
+    on_attach = on_attach,
+    cmd = { "arduino-language-server", "-cli-config", "/Users/stevenjin8/Library/Arduino15/arduino-cli.yaml",
+        "-clangd", "/usr/bin/clangd",
+        "-fqbn",
+        "arduino:avr:micro",
+    }
+}
+
+lspconfig.lua_ls.setup {
+    on_attach = on_attach,
+    settings = {
+        Lua = {
+            diagnostics = { globals = { "vim" } },
+            workspace = {
+                library = {
+                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
+                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
+                }
             },
-        }
-    end,
-    ["arduino_language_server"] = function()
-        lspconfig.arduino_language_server.setup {
-            on_attach = on_attach,
-            cmd = { "arduino-language-server", "-cli-config", "/Users/stevenjin8/Library/Arduino15/arduino-cli.yaml",
-                "-clangd", "/usr/bin/clangd",
-                "-fqbn",
-                "arduino:avr:micro",
-            }
-        }
-    end,
-    ["lua_ls"] = function()
-        lspconfig.lua_ls.setup {
-            on_attach = on_attach,
-            settings = {
-                Lua = {
-                    diagnostics = { globals = { "vim" } },
-                    workspace = {
-                        library = {
-                            [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                            [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                        }
-                    },
-                    completion = {
-                        -- Disable autocompletion with comments. I can spell well enough.
-                        showWord = "Disable",
-                        workspaceWord = "Disable",
-                    },
-                },
+            completion = {
+                -- Disable autocompletion with comments. I can spell well enough.
+                showWord = "Disable",
+                workspaceWord = "Disable",
             },
-        }
-    end,
-    ["pyright"] = function()
-        lspconfig.pyright.setup({
-            on_attach = on_attach,
-            settings = {
-                python = {
-                    analysis = { typeCheckingMode = "basic" },
-                    pythonPath = ".venv/bin/python",
-                    venvPath = ".venv",
-                },
-            },
-        })
-    end,
-    ["clangd"] = function()
-        lspconfig.clangd.setup({
-            on_attach = on_attach,
-            settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
-        })
-    end,
-    ["rust_analyzer"] = function()
-        lspconfig.rust_analyzer.setup({
-            on_attach = on_attach,
-            settings = {
-                ["rust-analyzer"] = {}
-            }
-        })
-    end,
+        },
+    },
+}
+lspconfig.pyright.setup({
+    on_attach = on_attach,
+    settings = {
+        python = {
+            analysis = { typeCheckingMode = "basic" },
+            pythonPath = ".venv/bin/python",
+            venvPath = ".venv",
+        },
+    },
+})
+
+lspconfig.clangd.setup({
+    on_attach = on_attach,
+    settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
+})
+
+lspconfig.rust_analyzer.setup({
+    on_attach = on_attach,
+    settings = {
+        ["rust-analyzer"] = {}
+    }
 })

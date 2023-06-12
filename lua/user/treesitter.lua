@@ -5,7 +5,7 @@ if not success then
 end
 
 treesitter.setup({
-    ensure_installed = { "c", "python", "bash", "json", "jsonc", "yaml", "lua" },
+    ensure_installed = { "python", "bash", "rust", "lua" },
     sync_install = false,
     highlight = { enable = true, disable = { "tex", "latex" } },
     indent = { enable = true, disable = { "python" } },
