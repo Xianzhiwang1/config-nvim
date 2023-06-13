@@ -39,6 +39,8 @@ local autosnippets = {
         auto_default_opts),
     s({ trig = "sq" }, { t("\\sqrt["), i(1), t("]{"), i(2), t("}"), i(0) },
         auto_default_opts),
+    s({ trig = "ra" }, { t("\\xrightarrow["), i(1), t("]{"), i(2), t("}"), i(0) },
+        auto_default_opts),
     s({ trig = "half" }, { t("\\frac12") }, auto_default_opts),
     s({ trig = "del" }, { t("\\partial") }, auto_default_opts),
     s({ trig = "ndiv" }, { t("\\hspace{-4pt}\\not| \\hspace{2pt}") }, auto_default_opts),
