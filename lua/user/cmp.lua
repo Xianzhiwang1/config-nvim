@@ -65,20 +65,6 @@ cmp.setup({
         ["<Down>"] = cmp.mapping(function() cmp.select_next_item() end, { "i", "s" }),
     },
     sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" }  },
-    formatting = {
-        format = function(entry, vim_item)
-            local clients = vim.lsp.get_active_clients()
-            if clients[1] and clients[1].messages and clients[1].messages.name ==
-                "texlab" and entry and entry.source.name == "nvim_lsp" then
-                local s = tostring(entry:get_documentation()[2])
-                local p = string.find(s, ",")
-                if p then vim_item.menu = s:sub(1, p - 1) end
-                entry.get_documentation = function() return { "", s } end
-            end
-            vim_item.dup = { nvim_lsp = 1 }
-            return vim_item
-        end,
-    },
     sorting = {
         comparators = {
             compare.exact,

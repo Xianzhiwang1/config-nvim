@@ -1,5 +1,4 @@
 require("mason").setup()
-local mason_lsp = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
 
 local opts = { noremap = true, silent = true }
@@ -34,17 +33,6 @@ end
 
 lspconfig.texlab.setup {
     on_attach = on_attach,
-    settings = {
-    },
-}
-
-lspconfig.arduino_language_server.setup {
-    on_attach = on_attach,
-    cmd = { "arduino-language-server", "-cli-config", "/Users/stevenjin8/Library/Arduino15/arduino-cli.yaml",
-        "-clangd", "/usr/bin/clangd",
-        "-fqbn",
-        "arduino:avr:micro",
-    }
 }
 
 lspconfig.lua_ls.setup {
@@ -66,13 +54,14 @@ lspconfig.lua_ls.setup {
         },
     },
 }
+
 lspconfig.pyright.setup({
     on_attach = on_attach,
     settings = {
         python = {
-            analysis = { typeCheckingMode = "basic" },
-            pythonPath = ".venv/bin/python",
-            venvPath = ".venv",
+            analysis = { typeCheckingMode = "none" },
+            diagnosticMode = "openFilesOnly",
+            autoSerachPaths = true,
         },
     },
 })
@@ -81,6 +70,14 @@ lspconfig.clangd.setup({
     on_attach = on_attach,
     settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
 })
+
+lspconfig.gopls.setup{
+    on_attach = on_attach,
+}
+
+lspconfig.bashls.setup{
+    on_attach = on_attach,
+}
 
 lspconfig.rust_analyzer.setup({
     on_attach = on_attach,

@@ -103,4 +103,4 @@ vim.opt.spell = true
 vim.opt.spelllang = "en_us,en_ca"
 
 -- color
-vim.opt.background = "light"
+vim.opt.background = "dark"
