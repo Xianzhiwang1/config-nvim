@@ -10,8 +10,12 @@ cmp.setup({
         end,
     },
     window = {
-        completion = cmp.config.window.bordered({ side_padding = 0 }),
-        documentation = cmp.config.window.bordered(),
+        completion = {
+            border = "single"
+        },
+        documentation = {
+            border = "single"
+        },
     },
     mapping = {
         -- Find a better way to scroll docs.
@@ -64,7 +68,7 @@ cmp.setup({
         ["<Up>"] = cmp.mapping(function() cmp.select_prev_item() end, { "i", "s" }),
         ["<Down>"] = cmp.mapping(function() cmp.select_next_item() end, { "i", "s" }),
     },
-    sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" }  },
+    sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" } },
     sorting = {
         comparators = {
             compare.exact,
@@ -82,4 +86,3 @@ cmp.setup({
     },
     matching = { disallow_fuzzy_matching = false },
 })
-

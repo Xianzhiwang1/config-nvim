@@ -1,61 +1,49 @@
-local status_ok, packer = pcall(require, "packer")
-
-if not status_ok then
-    vim.notify("Loading packer failed.")
-    return
+-- bootstrap lazy
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    })
 end
+vim.opt.rtp:prepend(lazypath)
 
--- Have packer use a popup window
-packer.init {
-    display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "rounded" })
-        end,
-    },
-}
 
--- Install your plugins here
-return packer.startup(function(use)
-    -- My plugins here
-    use("wbthomason/packer.nvim") -- Have packer manage itself
-    use("neovim/nvim-lspconfig")
-    use("nvim-lua/popup.nvim")    -- An implementation of the Popup API from vim in Neovim
-    use("nvim-lua/plenary.nvim")  -- Useful lua functions used ny lots of plugins
+local plugins = {
+    "neovim/nvim-lspconfig",
+    "nvim-lua/popup.nvim",                 -- An implementation of the Popup API from vim in Neovim
+    "nvim-lua/plenary.nvim",               -- Useful lua functions d ny lots of plugins
 
-    -- cmp plugins
-    use("hrsh7th/nvim-cmp")                    -- The completion plugin
-    use("hrsh7th/cmp-nvim-lsp")                -- The completion plugin
-    use("hrsh7th/cmp-buffer")                  -- buffer completions
-    use("hrsh7th/cmp-path")                    -- path completions
-    use("hrsh7th/cmp-cmdline")                 -- cmdline completions
-    use("hrsh7th/cmp-nvim-lua")                -- lua completions
-    use("hrsh7th/cmp-nvim-lsp-signature-help") -- lua completions
+    "hrsh7th/nvim-cmp",                    -- The completion plugin
+    "hrsh7th/cmp-nvim-lsp",                -- The completion plugin
+    "hrsh7th/cmp-buffer",                  -- buffer completions
+    "hrsh7th/cmp-path",                    -- path completions
+    "hrsh7th/cmp-cmdline",                 -- cmdline completions
+    "hrsh7th/cmp-nvim-lua",                -- lua completions
+    "hrsh7th/cmp-nvim-lsp-signature-help", -- lua completions
 
-    use("nvim-treesitter/nvim-treesitter")
-
-    use("nvim-telescope/telescope-file-browser.nvim")
+    "nvim-treesitter/nvim-treesitter",
+    "nvim-telescope/telescope-file-browser.nvim",
 
     -- Snippets
-    use("L3MON4D3/LuaSnip")
-    use("saadparwaiz1/cmp_luasnip")
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
 
     -- TeX
-    use("lervag/vimtex")
+    "lervag/vimtex",
+    "farmergreg/vim-lastplace",
 
-    use("farmergreg/vim-lastplace")
+    "nvim-telescope/telescope.nvim",
+    "nvim-lualine/lualine.nvim",
+    "jose-elias-alvarez/null-ls.nvim",
 
-    use({
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.0",
-        requires = { { "nvim-lua/plenary.nvim" } }
-    })
-    use("nvim-lualine/lualine.nvim")
-    use("jose-elias-alvarez/null-ls.nvim")
+    "sindrets/diffview.nvim",
+    "lewis6991/gitsigns.nvim",
+    "iamcco/markdown-preview.nvim",
+}
 
-    use("sindrets/diffview.nvim")
-    use("lewis6991/gitsigns.nvim")
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    })
-end)
+require("lazy").setup(plugins, {})

@@ -72,7 +72,7 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- texconceal
-vim.opt.conceallevel = 2
+vim.opt.conceallevel = 1
 vim.g.tex_conceal = "abdmg"
 vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 
@@ -85,17 +85,19 @@ vim.g.vimtex_indent_on_ampersands = 0
 vim.g.vimtex_view_skim_sync = 1
 vim.g.vimtex_view_skim_activate = 1
 vim.g.vimtex_compiler_latexmk = {
-  build_dir = "./build",
-  callback = 1,
-  continuous = 1,
-  executable = "latexmk",
-  options = {
-    "-verbose",
-    "-file-line-error",
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-output-directory=build",
-  },
+    -- I think there was a breaking change where build_dir became out_dir
+    build_dir = "./build",
+    out_dir = "./build",
+    callback = 1,
+    continuous = 1,
+    executable = "latexmk",
+    options = {
+        "-verbose",
+        "-file-line-error",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-output-directory=build",
+    },
 }
 
 -- spelling

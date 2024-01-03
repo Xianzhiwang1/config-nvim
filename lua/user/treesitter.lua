@@ -7,8 +7,8 @@ end
 treesitter.setup({
     ensure_installed = { "python", "bash", "rust", "lua" },
     sync_install = false,
-    highlight = { enable = true, disable = { "tex", "latex" } },
-    indent = { enable = true, disable = { "python" } },
+    highlight = { enable = true, disable = { "tex", "latex" } }, -- use vimtex
+    indent = { enable = true, },
     folding = { enable = true },
 })
 

@@ -2,6 +2,11 @@ local lspconfig = require("lspconfig")
 
 local opts = { noremap = true, silent = true }
 
+-- https://jdhao.github.io/2021/08/12/nvim_sumneko_lua_conf/
+local runtime_path = vim.split(package.path, ";")
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 local on_attach = function(client, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -35,18 +40,26 @@ lspconfig.lua_ls.setup {
     on_attach = on_attach,
     settings = {
         Lua = {
+            runtime = {
+                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+                version = "LuaJIT",
+                -- Setup your lua path
+                path = runtime_path,
+            },
             diagnostics = { globals = { "vim" } },
             workspace = {
-                library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true
-                }
+                -- library = vim.api.nvim_get_runtime_file("", true)
+                -- isnt adding anything other than long lsp load times
             },
             completion = {
                 -- Disable autocompletion with comments. I can spell well enough.
                 showWord = "Disable",
                 workspaceWord = "Disable",
             },
+            telemetry = {
+                enable = false,
+            },
+
         },
     },
 }
@@ -67,11 +80,11 @@ lspconfig.clangd.setup({
     settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
 })
 
-lspconfig.gopls.setup{
+lspconfig.gopls.setup {
     on_attach = on_attach,
 }
 
-lspconfig.bashls.setup{
+lspconfig.bashls.setup {
     on_attach = on_attach,
 }
 
