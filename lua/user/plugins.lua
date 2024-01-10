@@ -48,8 +48,9 @@ return packer.startup(function(use)
     -- use 'simrat39/rust-tools.nvim'
     use("farmergreg/vim-lastplace")
 
+    -- telescope
     use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.0',
+        'nvim-telescope/telescope.nvim', tag = '0.1.5',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
     use('nvim-lualine/lualine.nvim')
