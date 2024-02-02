@@ -1,4 +1,6 @@
+
 -- bootstrap lazy
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -14,17 +16,16 @@ vim.opt.rtp:prepend(lazypath)
 
 
 local plugins = {
+    { "folke/neodev.nvim", opts = {} },
     "neovim/nvim-lspconfig",
-    "nvim-lua/popup.nvim",                 -- An implementation of the Popup API from vim in Neovim
     "nvim-lua/plenary.nvim",               -- Useful lua functions d ny lots of plugins
 
     "hrsh7th/nvim-cmp",                    -- The completion plugin
     "hrsh7th/cmp-nvim-lsp",                -- The completion plugin
-    "hrsh7th/cmp-buffer",                  -- buffer completions
     "hrsh7th/cmp-path",                    -- path completions
-    "hrsh7th/cmp-cmdline",                 -- cmdline completions
-    "hrsh7th/cmp-nvim-lua",                -- lua completions
     "hrsh7th/cmp-nvim-lsp-signature-help", -- lua completions
+    -- "hrsh7th/cmp-buffer",                  -- buffer completions
+    -- "hrsh7th/cmp-cmdline",                 -- cmdline completions
 
     "nvim-treesitter/nvim-treesitter",
     "nvim-telescope/telescope-file-browser.nvim",
@@ -43,7 +44,7 @@ local plugins = {
 
     "sindrets/diffview.nvim",
     "lewis6991/gitsigns.nvim",
-    "iamcco/markdown-preview.nvim",
+    -- jkkk"iamcco/markdown-preview.nvim",
 }
 
 require("lazy").setup(plugins, {})

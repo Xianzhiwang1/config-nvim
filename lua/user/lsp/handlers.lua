@@ -4,10 +4,10 @@ local M = {}
 
 M.setup = function()
     lsp.handlers["textDocument/hover"] = lsp.with(vim.lsp.handlers.hover, {
-        border = "single",
+        border = "rounded",
     })
     lsp.handlers["textDocument/signatureHelp"] = lsp.with(vim.lsp.handlers.signature_help, {
-        border = "single",
+        border = "rounded",
     })
     vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -17,8 +17,8 @@ M.setup = function()
         })
     vim.diagnostic.config({
         float = {
-            source = 'always',
-            border = "single"
+            source = "always",
+            border = "rounded"
         },
     })
 end

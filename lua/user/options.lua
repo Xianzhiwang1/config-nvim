@@ -41,15 +41,10 @@ vim.opt.writebackup = false
 vim.opt.expandtab = true
 -- the number of spaces inserted for each indentation
 vim.opt.shiftwidth = 4
--- insert 2 spaces for a tab
 vim.opt.tabstop = 4
--- highlight the current line
 vim.opt.cursorline = true
--- set numbered lines
 vim.opt.number = true
--- set relative numbered lines
 vim.opt.relativenumber = false
--- set number column width to 4
 vim.opt.numberwidth = 4
 -- always show the sign column, otherwise it would shift the text each time
 vim.opt.signcolumn = "no"
@@ -72,8 +67,7 @@ vim.o.foldmethod = "expr"
 vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- texconceal
-vim.opt.conceallevel = 1
-vim.g.tex_conceal = "abdmg"
+vim.opt.conceallevel = 2
 vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 
 -- vimtex options

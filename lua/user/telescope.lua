@@ -1,22 +1,7 @@
-local success, telescope = pcall(require, "nvim-treesitter.configs")
-if not success then
-    print("WARNING: telescope not loaded.")
-    return
-end
 require('telescope').setup {
     defaults = {
         file_ignore_patterns = { ".git/.*$", },
-        border = true,
-        borderchars = {"─", "│", "─", "│", "┌", "┐", "┘", "└"}, -- termius being annoying
     },
-    extensions = {
-        file_browser = {
-            -- use the "ivy" theme if you want
-            dir_icon = ""
-        },
-    },
-
-
 }
 require("telescope").load_extension("file_browser")
 

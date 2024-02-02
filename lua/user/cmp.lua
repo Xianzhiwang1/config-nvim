@@ -1,5 +1,4 @@
 -- Setup nvim-cmp.
-local compare = require("cmp.config.compare")
 local cmp = require "cmp"
 local luasnip = require("luasnip")
 
@@ -11,17 +10,16 @@ cmp.setup({
     },
     window = {
         completion = {
-            border = "single"
+            border = "rounded"
         },
         documentation = {
-            border = "single"
+            border = "rounded"
         },
     },
     mapping = {
         -- Find a better way to scroll docs.
         ['<C-j>'] = cmp.mapping.scroll_docs(4),
         ['<C-k>'] = cmp.mapping.scroll_docs(-4),
-        -- TODO: Better jumping? I dont really use jumping
         -- Expand snippets with spacebar if cmp menu is visible
         ["<Space>"] = cmp.mapping(function(fallback)
             if luasnip.expandable() and cmp.visible() and cmp.get_active_entry() then
@@ -69,20 +67,5 @@ cmp.setup({
         ["<Down>"] = cmp.mapping(function() cmp.select_next_item() end, { "i", "s" }),
     },
     sources = { { name = "luasnip" }, { name = "nvim_lsp" }, { name = "path" } },
-    sorting = {
-        comparators = {
-            compare.exact,
-            compare.score,
-            compare.length,
-            compare.recently_used,
-            function(a, b)
-                local doc_a = tostring(a:get_documentation()[2]) or ""
-                local doc_b = tostring(b:get_documentation()[2]) or ""
-                local uda = doc_a:find("user%-defined") or 0
-                local udb = doc_b:find("user%-defined") or 0
-                return uda < udb
-            end,
-        },
-    },
     matching = { disallow_fuzzy_matching = false },
 })

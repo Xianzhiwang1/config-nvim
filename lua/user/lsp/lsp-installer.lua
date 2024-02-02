@@ -2,12 +2,13 @@ local lspconfig = require("lspconfig")
 
 local opts = { noremap = true, silent = true }
 
--- https://jdhao.github.io/2021/08/12/nvim_sumneko_lua_conf/
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
 
-local on_attach = function(client, bufnr)
+-- https://jdhao.github.io/2021/08/12/nvim_sumneko_lua_conf/
+-- local runtime_path = vim.split(package.path, ";")
+-- table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.lua")
+
+local on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
     -- Mappings.

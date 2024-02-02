@@ -55,6 +55,10 @@ local autosnippets = {
     s({ trig = "xx" }, { t("\\times") }, auto_default_opts),
     s({ trig = "RN" }, { t("\\mathbb{R}^N") }, auto_default_opts),
     s({ trig = "RR" }, { t("\\mathbb{R}") }, auto_default_opts),
+    s({ trig = "xi2" }, { t("\\lvert x_i \\rvert^2") }, auto_default_opts),
+    s({ trig = "xj2" }, { t("\\lvert x_j \\rvert^2") }, auto_default_opts),
+    s({ trig = "pi2" }, { t("\\lvert \\pi_i \\rvert^2") }, auto_default_opts),
+    s({ trig = "pj2" }, { t("\\lvert \\pi_j \\rvert^2") }, auto_default_opts),
     s({ trig = "sbst" }, { t("\\subseteq") }, auto_default_opts),
     s({ trig = "<<" }, { t("\\langle") }, auto_default_opts),
     s({ trig = ">>" }, { t("\\rangle") }, auto_default_opts),
@@ -75,9 +79,9 @@ local autosnippets = {
             end),
     }), auto_default_opts),
     postfix({ trig = "([%a%d^{}\\-]+)nrm", regTrig = true, match_pattern = POSTFIX_MATCH }, {
-        t("\\lvert "),
+        t("\\lVert "),
         f(function(_, parent) return parent.captures[1] end),
-        t(" \\rvert"),
+        t(" \\rVert"),
     }, auto_default_opts),
     s({ trig = "(%d)(%d)(%d)cs", regTrig = true }, {
         f(
@@ -142,7 +146,7 @@ local default_opts = {
 
 local snippets = {
     s({ trig = "set" }, { t("\\{ "), i(1), t(" \\}"), i(0) }, auto_default_opts),
-    s({ trig = "nrm" }, { t("\\lvert "), i(1), t(" \\rvert"), i(0) },
+    s({ trig = "nrm" }, { t("\\lVert "), i(1), t(" \\rVert"), i(0) },
         auto_default_opts),
     s({ trig = "lint" },
         { t("\\int\\limits_{"), i(1), t("}^{"), i(2), t("}"), i(0) }, default_opts),
