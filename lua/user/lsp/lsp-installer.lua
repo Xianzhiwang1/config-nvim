@@ -1,12 +1,9 @@
 local lspconfig = require("lspconfig")
+local util = require("lspconfig.util")
 
 local opts = { noremap = true, silent = true }
 
 
--- https://jdhao.github.io/2021/08/12/nvim_sumneko_lua_conf/
--- local runtime_path = vim.split(package.path, ";")
--- table.insert(runtime_path, "lua/?.lua")
--- table.insert(runtime_path, "lua/?/init.lua")
 
 local on_attach = function(_, bufnr)
     -- Enable completion triggered by <c-x><c-o>
@@ -35,6 +32,7 @@ end
 
 lspconfig.texlab.setup {
     on_attach = on_attach,
+    root_dir = util.root_pattern('.git', '.latexmkrc', ".texlabroot", "texlabroot", "Tectonic.toml"),
 }
 
 lspconfig.lua_ls.setup {
@@ -44,14 +42,8 @@ lspconfig.lua_ls.setup {
             runtime = {
                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
                 version = "LuaJIT",
-                -- Setup your lua path
-                path = runtime_path,
             },
             diagnostics = { globals = { "vim" } },
-            workspace = {
-                -- library = vim.api.nvim_get_runtime_file("", true)
-                -- isnt adding anything other than long lsp load times
-            },
             completion = {
                 -- Disable autocompletion with comments. I can spell well enough.
                 showWord = "Disable",
@@ -60,7 +52,6 @@ lspconfig.lua_ls.setup {
             telemetry = {
                 enable = false,
             },
-
         },
     },
 }

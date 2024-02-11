@@ -24,6 +24,7 @@ local math_types = {
     bsy = "bsy",
     cal = "mathcal",
     bar = "bar",
+    ovl = "overline",
     und = "underline",
     hat = "hat",
     txt = "text",
