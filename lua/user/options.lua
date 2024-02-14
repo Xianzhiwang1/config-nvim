@@ -96,7 +96,7 @@ vim.g.vimtex_compiler_latexmk = {
 
 -- spelling
 vim.opt.spell = true
-vim.opt.spelllang = "en_us,en_ca"
+vim.opt.spelllang = "en_us,en_ca,es"
 
 -- color
 vim.opt.background = "dark"
