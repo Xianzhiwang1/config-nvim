@@ -28,7 +28,8 @@ vim.opt.splitright = true
 vim.opt.swapfile = true
 -- set term gui colors (most terminals support this)
 vim.opt.termguicolors = true
-vim.g.colors_name = "solarized"
+vim.cmd "colorscheme solarized"
+vim.opt.background = "dark"
 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.timeoutlen = 1000
 -- enable persistent undo
@@ -99,4 +100,3 @@ vim.opt.spell = true
 vim.opt.spelllang = "en_us,en_ca,es"
 
 -- color
-vim.opt.background = "dark"
