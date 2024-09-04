@@ -1,4 +1,3 @@
-
 -- bootstrap lazy
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -44,7 +43,10 @@ local plugins = {
 
     "sindrets/diffview.nvim",
     "lewis6991/gitsigns.nvim",
+    "towolf/vim-helm",
+    "nvim-treesitter/nvim-treesitter-context",
     -- jkkk"iamcco/markdown-preview.nvim",
+    'akinsho/bufferline.nvim',
 }
 
 require("lazy").setup(plugins, {})

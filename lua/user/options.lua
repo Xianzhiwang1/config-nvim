@@ -3,7 +3,7 @@ vim.opt.backup = false
 -- more space in the neovim command line for displaying messages
 vim.opt.cmdheight = 2
 -- mostly just for cmp
-vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = { "menuone" }
 -- the encoding written to a file
 vim.opt.fileencoding = "utf-8"
 -- highlight all matches on previous search pattern

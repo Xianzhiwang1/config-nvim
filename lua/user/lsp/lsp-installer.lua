@@ -23,7 +23,7 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
     vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
     vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-    vim.keymap.set('n', '<space>fm', function() vim.lsp.buf.format { async = true } end, bufopts)
+    vim.keymap.set('n', '<space>fm', function() vim.lsp.buf.format { async = false, timeout_ms = 1000 } end, bufopts)
     vim.keymap.set('n', '<space>de', vim.diagnostic.open_float, opts)
     vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
     vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
@@ -33,6 +33,16 @@ end
 lspconfig.texlab.setup {
     on_attach = on_attach,
     root_dir = util.root_pattern('.git', '.latexmkrc', ".texlabroot", "texlabroot", "Tectonic.toml"),
+}
+
+lspconfig.helm_ls.setup {
+  settings = {
+    ['helm-ls'] = {
+      yamlls = {
+        path = "yaml-language-server",
+      }
+    }
+  }
 }
 
 lspconfig.lua_ls.setup {
@@ -68,8 +78,10 @@ lspconfig.pyright.setup({
 })
 
 lspconfig.clangd.setup({
+    -- cmd = {"/home/sj/source/clangd_18.1.3/bin/clangd"},
     on_attach = on_attach,
-    settings = { CompileFlags = { std = "c11", compiler = "gcc" } },
+    settings = { CompileFlags = { std = "cpp14", compiler = "clang" } },
+    filetypes = {"h", "hpp", "cpp", "cc", "c"}
 })
 
 lspconfig.gopls.setup {

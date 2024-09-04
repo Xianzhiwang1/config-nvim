@@ -35,10 +35,14 @@ cmp.setup({
         end, { "i", "s" }),
         -- Supertab
         ["<Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.expandable() then
-                luasnip.expand()
-            elseif luasnip.jumpable() then
-                luasnip.jump(1)
+            -- Jumping is good for tex, but not so usefule when coding.
+            -- if luasnip.expandable() then
+            --     luasnip.expand()
+            -- elseif luasnip.jumpable() then
+            --     luasnip.jump(1)
+            if cmp.visible() and not cmp.get_active_entry() then
+                cmp.select_next_item()
+                cmp.select_prev_item()
             elseif cmp.visible() then
                 cmp.select_next_item()
             else
@@ -46,9 +50,10 @@ cmp.setup({
             end
         end, { "i", "s" }),
         ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if luasnip.jumpable() then
-                luasnip.jump(-1)
-            elseif cmp.visible() then
+            -- Jumping is good for tex, but not so usefule when coding.
+            -- if luasnip.jumpable() then
+            --     luasnip.jump(-1)
+            if cmp.visible() then
                 cmp.select_prev_item()
             else
                 fallback()
