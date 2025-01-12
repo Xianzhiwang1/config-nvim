@@ -1,5 +1,7 @@
 # Compiled Lua sources
 luac.out
+.venv
+vscode
 
 # luarocks build files
 *.src.rock
@@ -44,3 +46,4 @@ packer.nvim
 ssh
 **/*secret*
 .DS_Store
+spell

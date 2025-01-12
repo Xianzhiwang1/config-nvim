@@ -78,4 +78,6 @@ vim.api.nvim_command([[
   autocmd InsertLeave * set timeoutlen=1000
 ]])
 keymap("i", "jk", "<Esc>", term_opts)
+keymap("i", "Jk", "<Esc>", term_opts)
 keymap("i", "kj", "<Esc>", term_opts)
+keymap("i", "Kj", "<Esc>", term_opts)

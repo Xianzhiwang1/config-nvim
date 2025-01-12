@@ -18,6 +18,8 @@ local postfix = require("luasnip.extras.postfix").postfix
 
 local default_opts = { condition = utils.notin_mathzone }
 
+local POSTFIX_MATCH = [[[%w}]+$]]
+
 local auto_default_opts = {
     condition = utils.notin_mathzone,
     show_condition = function() return false end,
@@ -28,7 +30,7 @@ local autosnippets = {
     s("mk", { t("$"), i(1), t("$") }, auto_default_opts),
     s("bk", { t("{$"), i(1), t("$}") }, auto_default_opts),
     s("lbl", { t("\\label{"), i(1), t(":"), i(2), t("}") }, auto_default_opts),
-    postfix({ trig = "([%w]+);;", regTrig = true }, {
+    s({ trig = "([%w]+);;", regTrig = true }, {
         t("$"),
         f(function(_, parent) return parent.captures[1] end),
         t("$"),

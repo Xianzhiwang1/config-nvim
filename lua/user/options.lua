@@ -3,7 +3,7 @@ vim.opt.backup = false
 -- more space in the neovim command line for displaying messages
 vim.opt.cmdheight = 2
 -- mostly just for cmp
-vim.opt.completeopt = { "menuone", "noselect" }
+vim.opt.completeopt = { "menuone" }
 -- the encoding written to a file
 vim.opt.fileencoding = "utf-8"
 -- highlight all matches on previous search pattern
@@ -28,8 +28,13 @@ vim.opt.splitright = true
 vim.opt.swapfile = true
 -- set term gui colors (most terminals support this)
 vim.opt.termguicolors = true
+<<<<<<< HEAD
 -- vim.g.colors_name = "solarized"
 vim.g.colors_name = "gruvbox"
+=======
+vim.cmd "colorscheme solarized"
+vim.opt.background = "dark"
+>>>>>>> 6e99f0c13c6edff76042c2f422290afeba90fe5a
 -- time to wait for a mapped sequence to complete (in milliseconds)
 vim.opt.timeoutlen = 1000
 -- enable persistent undo
@@ -42,15 +47,10 @@ vim.opt.writebackup = false
 vim.opt.expandtab = true
 -- the number of spaces inserted for each indentation
 vim.opt.shiftwidth = 4
--- insert 2 spaces for a tab
 vim.opt.tabstop = 4
--- highlight the current line
 vim.opt.cursorline = true
--- set numbered lines
 vim.opt.number = true
--- set relative numbered lines
 vim.opt.relativenumber = false
--- set number column width to 4
 vim.opt.numberwidth = 4
 -- always show the sign column, otherwise it would shift the text each time
 vim.opt.signcolumn = "no"
@@ -74,7 +74,6 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 -- texconceal
 vim.opt.conceallevel = 2
-vim.g.tex_conceal = "abdmg"
 vim.api.nvim_set_hl(0, "Conceal", { ctermfg = nil, guitermbg = nil })
 
 -- vimtex options
@@ -88,24 +87,27 @@ vim.g.vimtex_indent_on_ampersands = 0
 vim.g.vimtex_view_skim_sync = 1
 vim.g.vimtex_view_skim_activate = 1
 vim.g.vimtex_compiler_latexmk = {
-  build_dir = "./build",
-  callback = 1,
-  continuous = 1,
-  executable = "latexmk",
-  options = {
-    "-verbose",
-    "-file-line-error",
-    "-synctex=1",
-    "-interaction=nonstopmode",
-    "-output-directory=build",
-  },
+    -- I think there was a breaking change where build_dir became out_dir
+    --build_dir = "./build",
+    out_dir = "./build",
+    callback = 1,
+    continuous = 1,
+    executable = "latexmk",
+    options = {
+        "-verbose",
+        "-file-line-error",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-output-directory=build",
+    },
 }
 
 -- spelling
 vim.opt.spell = true
-vim.opt.spelllang = "en_us,en_ca"
+vim.opt.spelllang = "en_us,en_ca,es"
 
 -- color
+<<<<<<< HEAD
 -- here is the place to change the color of nvim
 vim.opt.background = "dark"
 -- vim.opt.background = "light"
@@ -116,3 +118,5 @@ vim.opt.background = "dark"
 
 
 
+=======
+>>>>>>> 6e99f0c13c6edff76042c2f422290afeba90fe5a
